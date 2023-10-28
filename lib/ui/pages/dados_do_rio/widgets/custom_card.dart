@@ -6,7 +6,7 @@ enum CustomCardAction { previous, next }
 class CustomCard extends StatelessWidget {
   final String title;
   final List<Widget> children;
-  final bool showPreviousButton;
+  final String singleButtonText;
   final Function(CustomCardAction) onPressed;
 
   const CustomCard({
@@ -14,7 +14,7 @@ class CustomCard extends StatelessWidget {
     required this.title,
     required this.children,
     required this.onPressed,
-    this.showPreviousButton = true,
+    this.singleButtonText = "",
   });
 
   @override
@@ -59,7 +59,7 @@ class CustomCard extends StatelessWidget {
             ),
           ButtonBar(
             children: [
-              if (showPreviousButton)
+              if (singleButtonText.isEmpty)
                 OutlinedButton(
                   onPressed: () => onPressed(CustomCardAction.previous),
                   style: OutlinedButton.styleFrom(
@@ -84,7 +84,9 @@ class CustomCard extends StatelessWidget {
                   backgroundColor: AppColors.accent,
                   foregroundColor: Colors.white,
                 ),
-                child: Text(showPreviousButton ? "Próximo" : "Confirmar"),
+                child: Text(
+                  singleButtonText.isEmpty ? "Próximo" : singleButtonText,
+                ),
               )
             ],
           )

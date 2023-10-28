@@ -31,7 +31,6 @@ class _DadosDoRioPageState extends State<DadosDoRioPage> {
               children: [
                 CustomCard(
                   title: "Dados do Rio",
-                  showPreviousButton: false,
                   onPressed: (action) {
                     setState(() => index = switch (action) {
                           CustomCardAction.previous => index - 1,
@@ -57,6 +56,20 @@ class _DadosDoRioPageState extends State<DadosDoRioPage> {
                   ],
                 ),
               ],
+            ),
+            const SizedBox(height: 20),
+            CustomCard(
+              title: "Clique aqui para ver X",
+              singleButtonText: "Ajuda",
+              onPressed: (action) {
+                showDialog(
+                  context: context,
+                  builder: (context) => const Dialog(
+                    child: Text("Ajuda"),
+                  ),
+                );
+              },
+              children: const [],
             )
           ],
         ),
