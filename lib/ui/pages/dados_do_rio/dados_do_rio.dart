@@ -1,3 +1,4 @@
+import 'package:auto_depura/ui/pages/dados_do_rio/steps/dados_rio_step1.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
@@ -13,6 +14,21 @@ class DadosDoRioPage extends StatefulWidget {
 
 class _DadosDoRioPageState extends State<DadosDoRioPage> {
   int index = 0;
+  void onPressed(CustomCardAction action) {
+    switch (action) {
+      case CustomCardAction.previous:
+        if (index >= 1) setState(() => index--);
+        break;
+      case CustomCardAction.next:
+        // se index menor menor ou igual a total de steps - 1:
+        if (index <= 1) setState(() => index++);
+        break;
+      case CustomCardAction.start:
+        setState(() => index = 0);
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,37 +45,12 @@ class _DadosDoRioPageState extends State<DadosDoRioPage> {
             IndexedStack(
               index: index,
               children: [
-                CustomCard(
-                  title: "Dados do Rio",
-                  onPressed: (action) {},
-                  children: [
-                    CustomInput(
-                      controller: TextEditingController(),
-                      title: "Qr",
-                      hintText: "m³/s",
-                    ),
-                    CustomInput(
-                      controller: TextEditingController(),
-                      title: "ODr",
-                      hintText: "mg/L",
-                    ),
-                    CustomInput(
-                      controller: TextEditingController(),
-                      title: "DBOr",
-                      hintText: "mg/L",
-                    ),
-                    CustomInput(
-                      controller: TextEditingController(),
-                      title: "ODmin",
-                      hintText: "mg/L",
-                    ),
-                  ],
-                ),
+                DadosRioStep1(onPressed: onPressed),
               ],
             ),
             const SizedBox(height: 20),
             CustomCard(
-              title: "Clique aqui para ver X",
+              title: "Clique aqui para auxílio em ODr",
               singleButtonText: "Ajuda",
               onPressed: (action) {
                 showDialog(

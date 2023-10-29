@@ -29,7 +29,6 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
         setState(() => index = 0);
         break;
     }
-    print(serviceLocator<GlobalBloc>().qe);
   }
 
   @override
@@ -88,7 +87,7 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
                                   ),
                                 ),
                                 const TextSpan(text: "- ODe = 0 mg/L"),
-                                const TextSpan(text: "Esgoto Tratado:")
+                                const TextSpan(text: "\nEsgoto Tratado:")
                               ],
                             ),
                           )
