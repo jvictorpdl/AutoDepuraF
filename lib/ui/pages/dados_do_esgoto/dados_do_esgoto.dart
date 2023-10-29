@@ -1,3 +1,5 @@
+import 'package:auto_depura/core/bloc/global_bloc.dart';
+import 'package:auto_depura/core/services/service_locator.dart';
 import 'package:auto_depura/ui/pages/dados_do_esgoto/steps/dados_esgoto_step1.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
@@ -14,6 +16,22 @@ class DadosDoEsgotoPage extends StatefulWidget {
 
 class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
   int index = 0;
+  void onPressed(CustomCardAction action) {
+    switch (action) {
+      case CustomCardAction.previous:
+        if (index >= 1) setState(() => index--);
+        break;
+      case CustomCardAction.next:
+        // se index menor menor ou igual a total de steps - 1:
+        if (index <= 1) setState(() => index++);
+        break;
+      case CustomCardAction.start:
+        setState(() => index = 0);
+        break;
+    }
+    print(serviceLocator<GlobalBloc>().qe);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,24 +48,8 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
             IndexedStack(
               index: index,
               children: [
-                DadosEsgotoStep1(
-                  onPressed: (action) {
-                    setState(() => index = switch (action) {
-                          CustomCardAction.previous => index - 1,
-                          CustomCardAction.next => index + 1,
-                          CustomCardAction.start => index = 0,
-                        });
-                  },
-                ),
-                DadosEsgotoStep1(
-                  onPressed: (action) {
-                    setState(() => index = switch (action) {
-                          CustomCardAction.previous => index - 1,
-                          CustomCardAction.next => index + 1,
-                          CustomCardAction.start => index = 0,
-                        });
-                  },
-                ),
+                DadosEsgotoStep1(onPressed: onPressed),
+                DadosEsgotoStep1(onPressed: onPressed),
               ],
             ),
             const SizedBox(height: 20),

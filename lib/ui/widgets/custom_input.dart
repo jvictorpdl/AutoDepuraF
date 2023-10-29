@@ -1,5 +1,6 @@
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomInput extends StatefulWidget {
   final String title;
@@ -35,11 +36,15 @@ class _CustomInputState extends State<CustomInput> {
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
-                inputFormatters: const [
-                  // Aqui se adiciona o limite de caracteres
-                  // e tbm o regex para somente numeros decimais/inteiros
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(
+                      7), // Limita o número de caracteres
+                  FilteringTextInputFormatter.allow(
+                      RegExp(r'^\d+\.?\d*')), // Permite números decimais
                 ],
+                maxLength: 5,
                 decoration: InputDecoration(
+                  labelText: widget.hintText,
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 8,
                     vertical: 6,

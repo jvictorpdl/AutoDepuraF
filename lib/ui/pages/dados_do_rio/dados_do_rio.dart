@@ -31,13 +31,7 @@ class _DadosDoRioPageState extends State<DadosDoRioPage> {
               children: [
                 CustomCard(
                   title: "Dados do Rio",
-                  onPressed: (action) {
-                    setState(() => index = switch (action) {
-                          CustomCardAction.previous => index - 1,
-                          CustomCardAction.next => index + 1,
-                          CustomCardAction.start => index = 0,
-                        });
-                  },
+                  onPressed: (action) {},
                   children: [
                     CustomInput(
                       controller: TextEditingController(),
