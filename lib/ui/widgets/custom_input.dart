@@ -32,6 +32,7 @@ class _CustomInputState extends State<CustomInput> {
             Expanded(
               child: TextFormField(
                 cursorColor: Colors.grey,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 8,

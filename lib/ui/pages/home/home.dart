@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
             const Spacer(),
             HomeButtons(
               title: "Dados do Esgoto",
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pushNamed("/dados-do-esgoto"),
             ),
             const Spacer(),
             HomeButtons(

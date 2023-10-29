@@ -4,14 +4,14 @@ import 'package:auto_depura/ui/widgets/app_title.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
-class DadosDoRioPage extends StatefulWidget {
-  const DadosDoRioPage({super.key});
+class DadosDoEsgotoPage extends StatefulWidget {
+  const DadosDoEsgotoPage({super.key});
 
   @override
-  State<DadosDoRioPage> createState() => _DadosDoRioPageState();
+  State<DadosDoEsgotoPage> createState() => _DadosDoEsgotoPageState();
 }
 
-class _DadosDoRioPageState extends State<DadosDoRioPage> {
+class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _DadosDoRioPageState extends State<DadosDoRioPage> {
                   children: [
                     CustomInput(
                       controller: TextEditingController(),
-                      title: "Qr",
+                      title: "Qe",
                       hintText: "m³/s",
                     ),
                     CustomInput(
