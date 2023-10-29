@@ -32,7 +32,13 @@ class _CustomInputState extends State<CustomInput> {
             Expanded(
               child: TextFormField(
                 cursorColor: Colors.grey,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                inputFormatters: const [
+                  // Aqui se adiciona o limite de caracteres
+                  // e tbm o regex para somente numeros decimais/inteiros
+                ],
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 8,

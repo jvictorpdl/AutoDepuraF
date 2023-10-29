@@ -13,68 +13,74 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppPaddings.defaultPadding,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Spacer(),
-            const AppTitle(),
-            const Spacer(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Bem vindo!",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppPaddings.defaultPadding,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(),
+              const AppTitle(),
+              const Spacer(flex: 3),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Bem vindo!",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  DateFormat("dd MMMM yyyy")
-                      .format(
-                        DateTime.now(),
-                      )
-                      .split(" ")
-                      .join(" de "),
-                  style: const TextStyle(
-                    fontSize: 16,
+                  Text(
+                    DateFormat("dd MMMM yyyy")
+                        .format(
+                          DateTime.now(),
+                        )
+                        .split(" ")
+                        .join(" de "),
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            HomeButtons(
-              title: "Dados do Rio",
-              onPressed: () => Navigator.of(context).pushNamed("/dados-do-rio"),
-            ),
-            const Spacer(),
-            HomeButtons(
-              title: "Dados do Esgoto",
-              onPressed: () => Navigator.of(context).pushNamed("/dados-do-esgoto"),
-            ),
-            const Spacer(),
-            HomeButtons(
-              title: "Dados adicionais",
-              onPressed: () {},
-            ),
-            const Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.accent,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                ],
+              ),
+              const Spacer(flex: 4),
+              HomeButtons(
+                title: "Dados do Rio",
+                onPressed: () =>
+                    Navigator.of(context).pushNamed("/dados-do-rio"),
+              ),
+              const Spacer(),
+              HomeButtons(
+                title: "Dados do Esgoto",
+                onPressed: () =>
+                    Navigator.of(context).pushNamed("/dados-do-esgoto"),
+              ),
+              const Spacer(),
+              HomeButtons(
+                title: "Dados adicionais",
+                onPressed: () {},
+              ),
+              const Spacer(flex: 4),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.accent,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text("Calcular"),
                 ),
               ),
-              child: const Text("Calcular"),
-            ),
-            const Spacer(),
-          ],
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );
