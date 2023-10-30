@@ -42,7 +42,7 @@ class _CustomInputState extends State<CustomInput> {
                   FilteringTextInputFormatter.allow(
                       RegExp(r'^\d+\.?\d*')), // Permite números decimais
                 ],
-                maxLength: 5,
+                maxLength: 7,
                 decoration: InputDecoration(
                   labelText: widget.hintText,
                   contentPadding: const EdgeInsets.symmetric(

@@ -45,14 +45,16 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
       children: [
         CustomInput(
           controller: controller1,
-          title: "Qe",
-          hintText: "m³/s",
+          title: "DBOe",
+          hintText: "mg/L",
         ),
         CustomInput(
           controller: controller2,
-          title: "ODr",
-          hintText: "mg/L",
+          title: "Eficiência",
+          hintText: "%",
         ),
+
+        
         CustomInput(
           controller: controller3,
           title: "DBOr",

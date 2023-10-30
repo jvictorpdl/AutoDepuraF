@@ -67,7 +67,7 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
                           Text(
                             "Title",
                             style: AppTextStyles.h1.copyWith(
-                              color: Colors.black,
+                              color: Colors.red,
                             ),
                           ),
                           const Divider(
