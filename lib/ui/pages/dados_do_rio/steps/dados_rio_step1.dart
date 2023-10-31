@@ -33,7 +33,15 @@ class _DadosRioStep1State extends State<DadosRioStep1> {
   Widget build(BuildContext context) {
     return CustomCard(
       title: "Dados do Rio",
-      onPressed: widget.onPressed,
+      singleButtonText: "Concluir",
+
+      onPressed: (action){
+        if(controller1.text.isNotEmpty && controller2.text.isNotEmpty && controller3.text.isNotEmpty && controller4.text.isNotEmpty){
+        widget.onPressed(action);
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Dados incompletos"),backgroundColor: Colors.red,));
+        }
+      } ,
       children: [
         CustomInput(
           controller: controller1,

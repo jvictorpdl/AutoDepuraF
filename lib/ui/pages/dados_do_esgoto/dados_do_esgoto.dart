@@ -26,9 +26,7 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
         // se index menor menor ou igual a total de steps - 1:
         if (index <= 1) setState(() => index++);
         break;
-      case CustomCardAction.start:
-        setState(() => index = 0);
-        break;
+      
     }
   }
 
@@ -68,7 +66,7 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
                           Text(
                             "Title",
                             style: AppTextStyles.h1.copyWith(
-                              color: Colors.red,
+                              color: Colors.black,
                             ),
                           ),
                           const Divider(
@@ -102,7 +100,7 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
             ),
             const SizedBox(height: 20),
             CustomCard(
-              title: "Clique para ajuda em DBOr",
+              title: "Clique para auxílio em DBOr",
               singleButtonText: "Ajuda",
               onPressed: (action) {
                 showDialog(

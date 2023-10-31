@@ -1,7 +1,7 @@
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-enum CustomCardAction { previous, next, start }
+enum CustomCardAction { previous, next }
 
 class CustomCard extends StatelessWidget {
   final String title;
