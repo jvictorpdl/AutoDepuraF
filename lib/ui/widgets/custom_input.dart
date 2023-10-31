@@ -5,11 +5,13 @@ import 'package:flutter/services.dart';
 class CustomInput extends StatefulWidget {
   final String title;
   final String hintText;
+  // final String tooltip;
   final TextEditingController controller;
   const CustomInput(
       {super.key,
       required this.title,
       required this.hintText,
+      // required this.tooltip,
       required this.controller});
 
   @override
@@ -22,6 +24,7 @@ class _CustomInputState extends State<CustomInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        //perguntar onde encaixar a tooltip para ela ficar acima do title
         Text(
           widget.title,
           style: AppTextStyles.h3.copyWith(
@@ -42,7 +45,6 @@ class _CustomInputState extends State<CustomInput> {
                   FilteringTextInputFormatter.allow(
                       RegExp(r'^\d+\.?\d*')), // Permite números decimais
                 ],
-                maxLength: 7,
                 decoration: InputDecoration(
                   labelText: widget.hintText,
                   contentPadding: const EdgeInsets.symmetric(
