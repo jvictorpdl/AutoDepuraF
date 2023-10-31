@@ -60,7 +60,8 @@ class HomePage extends StatelessWidget {
               const Spacer(),
               HomeButtons(
                 title: "Dados adicionais",
-                onPressed: () {},
+                onPressed: () =>
+                  Navigator.of(context).pushNamed("/dados-adicionais"),
               ),
               const Spacer(flex: 4),
               Padding(
