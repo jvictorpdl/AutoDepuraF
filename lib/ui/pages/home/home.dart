@@ -1,6 +1,4 @@
-import 'package:auto_depura/ui/pages/dados_do_rio/dados_do_rio.dart';
 import 'package:auto_depura/ui/pages/home/widgets/expandable_cards.dart';
-import 'package:auto_depura/ui/pages/home/widgets/plus_button.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
 import 'package:flutter/material.dart';
@@ -65,17 +63,28 @@ class HomePage extends StatelessWidget {
                 onPressed: () {},
               ),
               const Spacer(flex: 4),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.accent,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.02,
+                  left: MediaQuery.of(context).size.width * 0.01,
+                ),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.060,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.accent,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      "Calcular",
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
-                  child: const Text("Calcular"),
                 ),
               ),
               const Spacer(),
