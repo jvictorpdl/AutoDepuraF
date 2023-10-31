@@ -23,6 +23,10 @@ class AppTextStyles {
     color: Colors.black,
     fontSize: 16,
   );
+  static TextStyle font = const TextStyle(
+    color: Colors.grey,
+    fontSize: 12,
+  );
 }
 
 class AppPaddings {
