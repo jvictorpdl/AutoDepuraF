@@ -67,5 +67,53 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
         ),
       ],
     );
+            // const SizedBox(height: 20),
+            // CustomCard(
+            //   title: "Clique para ajuda em ODr",
+            //   singleButtonText: "Ajuda",
+            //   onPressed: (action) {
+            //     showDialog(
+            //       context: context,
+            //       builder: (context) => Dialog(
+            //         child: Container(
+            //           padding: const EdgeInsets.all(AppPaddings.defaultPadding),
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               Text(
+            //                 "Title",
+            //                 style: AppTextStyles.h1.copyWith(
+            //                   color: Colors.black,
+            //                 ),
+            //               ),
+            //               const Divider(
+            //                 thickness: 2,
+            //                 color: Colors.grey,
+            //               ),
+            //               RichText(
+            //                 text: TextSpan(
+            //                   style: AppTextStyles.h3,
+            //                   text:
+            //                       "Não sendo possível coloetar amostras, sugere-se para esgoto doméstico:\n\n",
+            //                   children: [
+            //                     TextSpan(
+            //                       text: "Esgoto Bruto:\n",
+            //                       style: AppTextStyles.h3.copyWith(
+            //                         fontWeight: FontWeight.bold,
+            //                       ),
+            //                     ),
+            //                     const TextSpan(text: "- ODe = 0 mg/L"),
+            //                     const TextSpan(text: "\nEsgoto Tratado:")
+            //                   ],
+            //                 ),
+            //               )
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     );
+            //   },
+            //   children: const [],
+            // ),
   }
 }
