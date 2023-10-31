@@ -1,8 +1,8 @@
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class AppTitle extends StatelessWidget {
-  const AppTitle({
+class CustomCardOr extends StatelessWidget {
+  const CustomCardOr({
     super.key,
   });
 
