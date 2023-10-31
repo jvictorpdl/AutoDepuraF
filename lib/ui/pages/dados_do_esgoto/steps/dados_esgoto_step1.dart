@@ -42,11 +42,13 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
       },
       children: [
         CustomInput(
+          tooltip: "Vazão",
           controller: controller1,
           title: "Qe",
           hintText: "m³/s",
         ),
         CustomInput(
+          tooltip: "Oxigênio dissolvido",
           controller: controller2,
           title: "ODe",
           hintText: "mg/L",

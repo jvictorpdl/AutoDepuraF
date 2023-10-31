@@ -5,13 +5,13 @@ import 'package:flutter/services.dart';
 class CustomInput extends StatefulWidget {
   final String title;
   final String hintText;
-  // final String tooltip;
+  final String tooltip;
   final TextEditingController controller;
   const CustomInput(
       {super.key,
       required this.title,
       required this.hintText,
-      // required this.tooltip,
+      required this.tooltip,
       required this.controller});
 
   @override

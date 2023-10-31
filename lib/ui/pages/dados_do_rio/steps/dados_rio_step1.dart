@@ -44,23 +44,27 @@ class _DadosRioStep1State extends State<DadosRioStep1> {
       } ,
       children: [
         CustomInput(
+          tooltip: "Vazão",
           controller: controller1,
           title: "Qr",
           hintText: "m³/s",
         ),
         CustomInput(
           controller: controller2,
+          tooltip: "Oxigênio dissolvido",
           title: "ODr",
           hintText: "mg/L",
         ),
         CustomInput(
           controller: controller3,
           title: "DBOr",
+          tooltip: "Demanda bioquímica de oxigênio",
           hintText: "mg/L",
         ),
         CustomInput(
           controller: controller4,
           title: "ODmin",
+          tooltip: "Oxigênio dissolvido mínimo",
           hintText: "mg/L",
         ),
       ],
