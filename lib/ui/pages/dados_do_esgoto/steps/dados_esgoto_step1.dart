@@ -37,31 +37,23 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
       onPressed: (action) {
         widget.onPressed(action);
         bloc.qe = controller1.text.asDouble;
-        bloc.odr = controller2.text.asDouble;
-        bloc.dbor = controller3.text.asDouble;
-        bloc.odmin = controller4.text.asDouble;
+        bloc.ode = controller2.text.asDouble;
+        
       },
       children: [
         CustomInput(
+          tooltip: "Vazão",
           controller: controller1,
           title: "Qe",
           hintText: "m³/s",
         ),
         CustomInput(
+          tooltip: "Oxigênio dissolvido",
           controller: controller2,
-          title: "ODr",
+          title: "ODe",
           hintText: "mg/L",
         ),
-        CustomInput(
-          controller: controller3,
-          title: "DBOr",
-          hintText: "mg/L",
-        ),
-        CustomInput(
-          controller: controller4,
-          title: "ODmin",
-          hintText: "mg/L",
-        ),
+       
       ],
     );
   }

@@ -3,16 +3,17 @@ import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
+import 'package:auto_depura/ui/pages/dados_adicionais/steps/dados_adicionais_step1.dart';
 import 'package:flutter/material.dart';
 
-class DadosDoRioPage extends StatefulWidget {
-  const DadosDoRioPage({super.key});
+class DadosAdicionaisPage extends StatefulWidget {
+  const DadosAdicionaisPage({super.key});
 
   @override
-  State<DadosDoRioPage> createState() => _DadosDoRioPageState();
+  State<DadosAdicionaisPage> createState() => _DadosAdicionaisPageState();
 }
 
-class _DadosDoRioPageState extends State<DadosDoRioPage> {
+class _DadosAdicionaisPageState extends State<DadosAdicionaisPage> {
   int index = 0;
   void onPressed(CustomCardAction action) {
     switch (action) {
@@ -42,7 +43,7 @@ class _DadosDoRioPageState extends State<DadosDoRioPage> {
             IndexedStack(
               index: index,
               children: [
-                DadosRioStep1(onPressed: onPressed),
+                DadosAdicionaisStep1(onPressed: onPressed),
               ],
             ),
             const SizedBox(height: 20),

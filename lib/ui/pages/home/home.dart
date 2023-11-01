@@ -1,6 +1,4 @@
-import 'package:auto_depura/ui/pages/dados_do_rio/dados_do_rio.dart';
 import 'package:auto_depura/ui/pages/home/widgets/expandable_cards.dart';
-import 'package:auto_depura/ui/pages/home/widgets/plus_button.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +60,8 @@ class HomePage extends StatelessWidget {
               const Spacer(),
               HomeButtons(
                 title: "Dados adicionais",
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.of(context).pushNamed("/dados-adicionais"),
               ),
               const Spacer(flex: 4),
               SizedBox(

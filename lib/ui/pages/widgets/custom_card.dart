@@ -1,12 +1,13 @@
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-enum CustomCardAction { previous, next, start }
+enum CustomCardAction { previous, next }
 
 class CustomCard extends StatelessWidget {
   final String title;
   final List<Widget> children;
   final String singleButtonText;
+  final String confirmButton;
   final Function(CustomCardAction) onPressed;
 
   const CustomCard({
@@ -15,6 +16,9 @@ class CustomCard extends StatelessWidget {
     required this.children,
     required this.onPressed,
     this.singleButtonText = "",
+    this.confirmButton = "",
+    //usar o confirmButton para os casos de ser o ultimo step que substuirá o botão Proximo
+    //por um botão "Confirmar" mas ainda mantendo o botão voltar a esquerda
   });
 
   @override

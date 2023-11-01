@@ -1,19 +1,21 @@
 import 'package:auto_depura/core/bloc/global_bloc.dart';
 import 'package:auto_depura/core/extensions/double_to_input_text.dart';
+import 'package:auto_depura/core/extensions/string_to_double.dart';
 import 'package:auto_depura/core/services/service_locator.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
+import 'package:auto_depura/ui/pages/widgets/or_text_cc.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
-class DadosRioStep1 extends StatefulWidget {
+class DadosAdicionaisStep1 extends StatefulWidget {
   final Function(CustomCardAction) onPressed;
-  const DadosRioStep1({super.key, required this.onPressed});
+  const DadosAdicionaisStep1({super.key, required this.onPressed});
 
   @override
-  State<DadosRioStep1> createState() => _DadosRioStep1State();
+  State<DadosAdicionaisStep1> createState() => _DadosAdicionaisStep1State();
 }
 
-class _DadosRioStep1State extends State<DadosRioStep1> {
+class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
   late final TextEditingController controller1;
   late final TextEditingController controller2;
   late final TextEditingController controller3;
@@ -32,42 +34,44 @@ class _DadosRioStep1State extends State<DadosRioStep1> {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      title: "Dados do Rio",
-      singleButtonText: "Concluir",
-
-      onPressed: (action){
-        if(controller1.text.isNotEmpty && controller2.text.isNotEmpty && controller3.text.isNotEmpty && controller4.text.isNotEmpty){
+      title: "Dados morfométricos e ambientais",
+      onPressed: (action) {
         widget.onPressed(action);
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Dados incompletos"),backgroundColor: Colors.red,));
-        }
-      } ,
+        bloc.qe = controller1.text.asDouble;
+        bloc.ode = controller2.text.asDouble;
+      },
       children: [
         CustomInput(
-          tooltip: "Vazão",
           controller: controller1,
-          title: "Qr",
-          hintText: "m³/s",
+          tooltip: "Coeficiente de desoxigenação(20ºC)",
+          title: "K1(20ºC)",
+          hintText: "1/dia",
         ),
         CustomInput(
           controller: controller2,
-          tooltip: "Oxigênio dissolvido",
-          title: "ODr",
-          hintText: "mg/L",
+          tooltip: "θ para K1",
+          title: "θ para K1",
+          hintText: "ad.",
         ),
         CustomInput(
           controller: controller3,
-          title: "DBOr",
-          tooltip: "Demanda bioquímica de oxigênio",
-          hintText: "mg/L",
+          tooltip: "Temperatura",
+          title: "T",
+          hintText: "ºC",
         ),
+        const OrText(),
         CustomInput(
           controller: controller4,
-          title: "ODmin",
-          tooltip: "Oxigênio dissolvido mínimo",
-          hintText: "mg/L",
+          tooltip: "Coeficiente de desoxigenação a uma temperatura(T)",
+          title: "K1T",
+          hintText: "1/dia",
         ),
       ],
     );
   }
+
+  
+
+
+
 }
