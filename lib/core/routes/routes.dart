@@ -21,10 +21,6 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) => const DadosDoEsgotoPage(),
         );
-      case "/tables":
-        return MaterialPageRoute(
-          builder: (context) => TablesPage(),
-        );
       case "/dados-adicionais":
         return MaterialPageRoute(
           builder: (context) => const DadosAdicionaisPage(),

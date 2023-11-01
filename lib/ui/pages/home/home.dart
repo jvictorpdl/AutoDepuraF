@@ -1,4 +1,5 @@
 import 'package:auto_depura/ui/pages/home/widgets/expandable_cards.dart';
+import 'package:auto_depura/ui/pages/tables/tables_page.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,44 @@ class HomePage extends StatelessWidget {
                 child: Tooltip(
                   message: "",
                   child: ElevatedButton(
-                    onPressed: () => Navigator.of(context).pushNamed("/tables"),
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0),
+                        ),
+                        child: const CustomTable(
+                          tableObjects: [
+                            TableContent(
+                              header: "Primário",
+                              content: [
+                                ("Tratamento Primario", "25 - 40"),
+                              ],
+                            ),
+                            TableContent(
+                              header: "Lagoas de Estabilização",
+                              content: [
+                                ("Tratamento Primario", "25 - 40"),
+                                ("Tratamento Primario", "25 - 40"),
+                                ("Tratamento Primario", "25 - 40"),
+                                ("Tratamento Primario asd asd", "123123"),
+                                ("Tratamento Primario", "25 - 40"),
+                                ("Tratamento Primario", "25 - 40"),
+                                ("Tratamento Prima12312312rio", "25 - 40"),
+                              ],
+                            ),
+                            TableContent(
+                              header: "Lagoas",
+                              content: [
+                                ("Tratamento Primario", "25 - 40"),
+                                ("Tratamento Primario", "25 - 40"),
+                                ("Tratamento asdasdPrimario", "25 - 40"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.accent,
                       foregroundColor: Colors.white,
