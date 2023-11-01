@@ -1,6 +1,7 @@
 import 'package:auto_depura/ui/pages/dados_do_rio/dados_do_rio.dart';
 import 'package:auto_depura/ui/pages/dados_do_esgoto/dados_do_esgoto.dart';
 import 'package:auto_depura/ui/pages/home/home.dart';
+import 'package:auto_depura/ui/pages/tables/tables_page.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -18,6 +19,10 @@ class Routes {
       case "/dados-do-esgoto":
         return MaterialPageRoute(
           builder: (context) => const DadosDoEsgotoPage(),
+        );
+      case "/tables":
+        return MaterialPageRoute(
+          builder: (context) => TablesPage(),
         );
       default:
         return MaterialPageRoute(

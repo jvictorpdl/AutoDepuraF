@@ -65,17 +65,21 @@ class HomePage extends StatelessWidget {
                 onPressed: () {},
               ),
               const Spacer(flex: 4),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.accent,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+              SizedBox(
+                width: double.infinity,
+                child: Tooltip(
+                  message: "",
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pushNamed("/tables"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.accent,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
+                    child: const Text("Calcular"),
                   ),
-                  child: const Text("Calcular"),
                 ),
               ),
               const Spacer(),
