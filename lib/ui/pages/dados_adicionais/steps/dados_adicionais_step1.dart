@@ -45,7 +45,7 @@ class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
           controller: controller1,
           tooltip: "Coeficiente de desoxigenação(20ºC)",
           title: "K1(20ºC)",
-          hintText: "1/dia",
+          hintText: "d⁻¹",
         ),
         CustomInput(
           controller: controller2,
@@ -64,7 +64,7 @@ class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
           controller: controller4,
           tooltip: "Coeficiente de desoxigenação a uma temperatura(T)",
           title: "K1T",
-          hintText: "1/dia",
+          hintText: "d⁻¹",
         ),
       ],
     );
