@@ -22,7 +22,6 @@ class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
   late final TextEditingController controller3;
   late final TextEditingController controller4;
   late final TextEditingController controller5;
-  late final TextEditingController controller6;
   late final TextEditingController controller7;
   late final TextEditingController controller8;
   final GlobalBloc bloc = serviceLocator<GlobalBloc>();
@@ -34,7 +33,6 @@ class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
     controller3 = TextEditingController(text: bloc.temperatura.toText);
     controller4 = TextEditingController(text: bloc.h.toText);
     controller5 = TextEditingController(text: bloc.k220c.toText);
-    controller6 = TextEditingController(text: bloc.tetak2.toText);
     controller7 = TextEditingController(text: bloc.temperatura.toText);
     controller8 = TextEditingController(text: bloc.k2t.toText);
     super.initState();
@@ -51,7 +49,6 @@ class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
         bloc.temperatura = controller3.text.asDouble;
         bloc.h = controller4.text.asDouble;
         bloc.k220c = controller5.text.asDouble;
-        bloc.tetak2 = controller6.text.asDouble;
         bloc.temperatura = controller7.text.asDouble;
         bloc.k2t = controller8.text.asDouble; 
       },
@@ -90,7 +87,7 @@ class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
           hintText: "d⁻¹",
         ),
         CustomInput(
-          controller: controller6,
+          controller: controller2,
           title: "θ para K2",
           tooltip: "Coeficiente de temperatura",
           hintText: "ad.",
