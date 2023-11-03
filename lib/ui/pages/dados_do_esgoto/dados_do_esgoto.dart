@@ -27,7 +27,7 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
         }
         break;
       case CustomCardAction.next:
-        // se index menor menor ou igual a total de steps - 1:
+        // se index menor ou igual a total de steps - 1:
         if (index < 1) {
           setState(() => index++);
         }else{
