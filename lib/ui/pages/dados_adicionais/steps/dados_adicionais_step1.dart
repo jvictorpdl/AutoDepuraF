@@ -24,10 +24,10 @@ class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
 
   @override
   void initState() {
-    controller1 = TextEditingController(text: bloc.qe.toText);
-    controller2 = TextEditingController(text: bloc.odr.toText);
-    controller3 = TextEditingController(text: bloc.dbor.toText);
-    controller4 = TextEditingController(text: bloc.odmin.toText);
+    controller1 = TextEditingController(text: bloc.k120c.toText);
+    controller2 = TextEditingController(text: bloc.tetak1.toText);
+    controller3 = TextEditingController(text: bloc.temperatura.toText);
+    controller4 = TextEditingController(text: bloc.k1t.toText);
     super.initState();
   }
 
@@ -37,8 +37,10 @@ class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
       title: "Dados morfométricos e ambientais",
       onPressed: (action) {
         widget.onPressed(action);
-        bloc.qe = controller1.text.asDouble;
-        bloc.ode = controller2.text.asDouble;
+        bloc.k120c = controller1.text.asDouble;
+        bloc.tetak1 = controller2.text.asDouble;
+        bloc.temperatura = controller3.text.asDouble;
+        bloc.k1t = controller4.text.asDouble;
       },
       children: [
         CustomInput(

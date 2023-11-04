@@ -7,27 +7,34 @@ import 'package:auto_depura/ui/pages/widgets/or_text_cc.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
-class DadosAdicionaisStep1 extends StatefulWidget {
+
+class DadosAdicionaisStep2 extends StatefulWidget {
   final Function(CustomCardAction) onPressed;
-  const DadosAdicionaisStep1({super.key, required this.onPressed});
+  const DadosAdicionaisStep2({super.key, required this.onPressed});
 
   @override
-  State<DadosAdicionaisStep1> createState() => _DadosAdicionaisStep1State();
+  State<DadosAdicionaisStep2> createState() => _DadosAdicionaisStep2State();
 }
 
-class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
+class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
   late final TextEditingController controller1;
   late final TextEditingController controller2;
   late final TextEditingController controller3;
   late final TextEditingController controller4;
+  late final TextEditingController controller5;
+  late final TextEditingController controller7;
+  late final TextEditingController controller8;
   final GlobalBloc bloc = serviceLocator<GlobalBloc>();
 
   @override
   void initState() {
-    controller1 = TextEditingController(text: bloc.qe.toText);
-    controller2 = TextEditingController(text: bloc.odr.toText);
-    controller3 = TextEditingController(text: bloc.dbor.toText);
-    controller4 = TextEditingController(text: bloc.odmin.toText);
+    controller1 = TextEditingController(text: bloc.velocidade.toText);
+    controller2 = TextEditingController(text: bloc.tetak2.toText);
+    controller3 = TextEditingController(text: bloc.temperatura.toText);
+    controller4 = TextEditingController(text: bloc.h.toText);
+    controller5 = TextEditingController(text: bloc.k220c.toText);
+    controller7 = TextEditingController(text: bloc.temperatura.toText);
+    controller8 = TextEditingController(text: bloc.k2t.toText);
     super.initState();
   }
 
@@ -37,34 +44,68 @@ class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
       title: "Dados morfométricos e ambientais",
       onPressed: (action) {
         widget.onPressed(action);
-        bloc.qe = controller1.text.asDouble;
-        bloc.ode = controller2.text.asDouble;
+        bloc.velocidade = controller1.text.asDouble;
+        bloc.tetak2 = controller2.text.asDouble;
+        bloc.temperatura = controller3.text.asDouble;
+        bloc.h = controller4.text.asDouble;
+        bloc.k220c = controller5.text.asDouble;
+        bloc.temperatura = controller7.text.asDouble;
+        bloc.k2t = controller8.text.asDouble; 
       },
       children: [
         CustomInput(
           controller: controller1,
-          tooltip: "Coeficiente de desoxigenação(20ºC)",
-          title: "K1(20ºC)",
-          hintText: "1/dia",
+          title: "v",
+          tooltip: "Velocidade",
+          hintText: "d⁻¹",
         ),
         CustomInput(
           controller: controller2,
-          tooltip: "θ para K1",
-          title: "θ para K1",
+          title: "θ para K2",
+          tooltip: "Coeficiente de temperatura",
           hintText: "ad.",
         ),
         CustomInput(
           controller: controller3,
-          tooltip: "Temperatura",
           title: "T",
+          tooltip: "Temperatura do líquido",
           hintText: "ºC",
         ),
-        const OrText(),
         CustomInput(
           controller: controller4,
-          tooltip: "Coeficiente de desoxigenação a uma temperatura(T)",
-          title: "K1T",
-          hintText: "1/dia",
+          title: "H",
+          tooltip: "Profundidade",
+          hintText: "ºC",
+        ),
+        //
+        const OrText(),
+        //
+        CustomInput(
+          controller: controller5,
+          title: "K2 (20ºC)",
+          tooltip: "Coeficiente de reaeração (20ºC)",
+          hintText: "d⁻¹",
+        ),
+        CustomInput(
+          controller: controller2,
+          title: "θ para K2",
+          tooltip: "Coeficiente de temperatura",
+          hintText: "ad.",
+        ),
+        CustomInput(
+          controller: controller7,
+          title: "T",
+          tooltip: "Temperatura do líquido",
+          hintText: "ºC",
+        ),
+        //
+        const OrText(),
+        //
+        CustomInput(
+          controller: controller8,
+          tooltip: "Coeficiente de reaeração a temperatura",
+          title: "K2T",
+          hintText: "d⁻¹",
         ),
       ],
     );

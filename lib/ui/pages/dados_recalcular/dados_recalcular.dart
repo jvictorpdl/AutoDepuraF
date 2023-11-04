@@ -1,23 +1,23 @@
 import 'package:auto_depura/core/bloc/global_bloc.dart';
 import 'package:auto_depura/core/services/service_locator.dart';
-import 'package:auto_depura/ui/pages/dados_do_esgoto/steps/dados_esgoto_step1.dart';
-import 'package:auto_depura/ui/pages/dados_do_esgoto/steps/dados_esgoto_step2.dart';
+import 'package:auto_depura/ui/pages/dados_recalcular/dados_recalcularstep.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
-class DadosDoEsgotoPage extends StatefulWidget {
-  const DadosDoEsgotoPage({super.key});
+class DadosRecalcularPagePage extends StatefulWidget {
+  const DadosRecalcularPagePage({super.key});
 
   @override
-  State<DadosDoEsgotoPage> createState() => _DadosDoEsgotoPageState();
+  State<DadosRecalcularPagePage> createState() => _DadosRecalcularPagePageState();
 }
 
-class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
+class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
   int index = 0;
   void onPressed(CustomCardAction action) {
+    //colocar dois botões, um com voltar e o outro com "recalcular"
     switch (action) {
       case CustomCardAction.previous:
         if (index >= 1) {
@@ -54,8 +54,7 @@ class _DadosDoEsgotoPageState extends State<DadosDoEsgotoPage> {
             IndexedStack(
               index: index,
               children: [
-                DadosEsgotoStep1(onPressed: onPressed),
-                DadosEsgotoStep2(onPressed: onPressed),
+                DadosRecalcularStep(onPressed: onPressed),
               ],
             ),
             const SizedBox(height: 20),

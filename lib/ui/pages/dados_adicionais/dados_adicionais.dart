@@ -1,9 +1,10 @@
-import 'package:auto_depura/ui/pages/dados_do_rio/steps/dados_rio_step1.dart';
+import 'package:auto_depura/ui/pages/dados_adicionais/steps/dados_adicionais_step1.dart';
+import 'package:auto_depura/ui/pages/dados_adicionais/steps/dados_adicionais_step2.dart';
+import 'package:auto_depura/ui/pages/dados_adicionais/steps/dados_adicionais_step3.dart';
+import 'package:auto_depura/ui/pages/dados_adicionais/steps/dados_adicionais_step4.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
-import 'package:auto_depura/ui/widgets/custom_input.dart';
-import 'package:auto_depura/ui/pages/dados_adicionais/steps/dados_adicionais_step1.dart';
 import 'package:flutter/material.dart';
 
 class DadosAdicionaisPage extends StatefulWidget {
@@ -18,11 +19,12 @@ class _DadosAdicionaisPageState extends State<DadosAdicionaisPage> {
   void onPressed(CustomCardAction action) {
     switch (action) {
       case CustomCardAction.previous:
-        if (index >= 1) setState(() => index--);
+        if (index >= 1){ setState(() => index--);}
+        else{Navigator.of(context).pushReplacementNamed("/home");}
         break;
       case CustomCardAction.next:
-        // se index menor menor ou igual a total de steps - 1:
-        Navigator.of(context).pushReplacementNamed("/home");
+        // se index menor ou igual a total de steps - 1:
+        if (index < 10){ setState(() => index++);}
         break;
     }
   }
@@ -44,11 +46,14 @@ class _DadosAdicionaisPageState extends State<DadosAdicionaisPage> {
               index: index,
               children: [
                 DadosAdicionaisStep1(onPressed: onPressed),
+                DadosAdicionaisStep2(onPressed: onPressed),
+                DadosAdicionaisStep3(onPressed: onPressed),
+                DadosAdicionaisStep4(onPressed: onPressed),
               ],
             ),
             const SizedBox(height: 20),
             CustomCard(
-              title: "Clique aqui para auxílio em ODr",
+              title: "Clique para auxílio em θ para K1",
               singleButtonText: "Ajuda",
               onPressed: (action) {
                 showDialog(
@@ -61,7 +66,7 @@ class _DadosAdicionaisPageState extends State<DadosAdicionaisPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Oxigênio dissolvido no rio",
+                            "Auxílio em θ para K1",
                             style: AppTextStyles.h1.copyWith(
                               color: Colors.black,
                             ),
@@ -77,23 +82,109 @@ class _DadosAdicionaisPageState extends State<DadosAdicionaisPage> {
                                   "",
                               children: [
                                 TextSpan(
-                                  text: "Não sendo possível coletar amostras, pode-se estimar a concentração de ODr em função do grau de poluição do curso d’água:\n\n",
+                                  text: "Valor usual de θ é de 1,047 (acréscimo de 4,7% em K1 para cada aumento de 1 °C na temperatura da água).\n",
                                   style: AppTextStyles.h3.copyWith(fontWeight: FontWeight.bold,),
                                 ),
                                 TextSpan(
-                                  text: "● Curso d’água com poucos indícios de poluição:\n",
-                                  style: AppTextStyles.h3.copyWith(fontWeight: FontWeight.bold)
-                                ),
-                                const TextSpan(
-                                  text: "ODr pode ser de 80 a 90% do valor de saturação de oxigênio do rio;\n\n",
-                                ),
-                                TextSpan(
-                                    text: "● Curso d'água bem poluído:\n",
-                                    style: AppTextStyles.h3.copyWith(
+                                    text: "Fonte: Von Sperling (2005)\n",
+                                    style: AppTextStyles.font.copyWith(
                                       fontWeight: FontWeight.bold,
                                     )),
-                                const TextSpan(
-                                  text: "incluir os principais focos poluidores (ODr será bem inferior ao teor de saturação).",
+                                
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              children: const [],
+            ),
+            const SizedBox(height: 20),
+            CustomCard(
+              title: "Clique para auxílio em θ para K2",
+              singleButtonText: "Ajuda",
+              onPressed: (action) {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: Container(
+                      padding: const EdgeInsets.all(AppPaddings.defaultPadding),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Auxílio em θ para K2",
+                            style: AppTextStyles.h1.copyWith(
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Divider(
+                            thickness: 2,
+                            color: Colors.grey,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              style: AppTextStyles.h3,
+                              text:
+                                  "",
+                              children: [
+                                TextSpan(
+                                  text: "Valor usual de θ é de 1,024.\n",
+                                  style: AppTextStyles.h3.copyWith(fontWeight: FontWeight.bold,),
+                                ),
+                                TextSpan(
+                                    text: "Fonte: Von Sperling (2005)\n",
+                                    style: AppTextStyles.font.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              children: const [],
+            ),
+            const SizedBox(height: 20),
+            CustomCard(
+              title: "Clique para auxílio em Nº de trechos",
+              singleButtonText: "Ajuda",
+              onPressed: (action) {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: Container(
+                      padding: const EdgeInsets.all(AppPaddings.defaultPadding),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Número de trechos no rio",
+                            style: AppTextStyles.h1.copyWith(
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Divider(
+                            thickness: 2,
+                            color: Colors.grey,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              style: AppTextStyles.h3,
+                              text:
+                                  "",
+                              children: [
+                                TextSpan(
+                                  text: "Número de trechos ao longo da distância para o cálculo do oxigênio dissolvido.\n",
+                                  style: AppTextStyles.h3.copyWith(fontWeight: FontWeight.bold,),
                                 ),
                               ],
                             ),
@@ -105,7 +196,7 @@ class _DadosAdicionaisPageState extends State<DadosAdicionaisPage> {
                 );
               },
               children: const [],
-            )
+            ),
           ],
         ),
       ),
