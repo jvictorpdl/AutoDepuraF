@@ -36,9 +36,7 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
         CustomCard(
           title: "Dados do Esgoto",
           onPressed: (action) {
-            if (controller1.text.isNotEmpty &&
-                controller2.text.isNotEmpty 
-                ) {
+            if (controller1.text.isNotEmpty && controller2.text.isNotEmpty) {
               widget.onPressed(action);
               bloc.qe = controller1.text.asDouble;
               bloc.ode = controller2.text.asDouble;
@@ -134,7 +132,6 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
           },
           children: const [],
         ),
-        
       ],
     );
   }

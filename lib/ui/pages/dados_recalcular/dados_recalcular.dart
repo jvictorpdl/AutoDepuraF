@@ -1,6 +1,6 @@
 import 'package:auto_depura/core/bloc/global_bloc.dart';
 import 'package:auto_depura/core/services/service_locator.dart';
-import 'package:auto_depura/ui/pages/dados_recalcular/dados_recalcularstep.dart';
+import 'package:auto_depura/ui/pages/dados_recalcular/step/dado_recalcular_step1.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
@@ -10,7 +10,8 @@ class DadosRecalcularPagePage extends StatefulWidget {
   const DadosRecalcularPagePage({super.key});
 
   @override
-  State<DadosRecalcularPagePage> createState() => _DadosRecalcularPagePageState();
+  State<DadosRecalcularPagePage> createState() =>
+      _DadosRecalcularPagePageState();
 }
 
 class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
@@ -29,7 +30,7 @@ class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
         // se index menor ou igual a total de steps - 1:
         if (index < 1) {
           setState(() => index++);
-        }else{
+        } else {
           Navigator.of(context).pushReplacementNamed("/home");
         }
 
@@ -65,7 +66,6 @@ class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
                   context: context,
                   builder: (context) => Dialog(
                     child: Container(
-
                       padding: const EdgeInsets.all(AppPaddings.defaultPadding),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -82,7 +82,6 @@ class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
                             color: Colors.grey,
                           ),
                           RichText(
-                            
                             text: TextSpan(
                               style: AppTextStyles.h3,
                               text:
@@ -101,14 +100,21 @@ class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const TextSpan(text: "\n● Tratamento primário: ODe = 0 mg/L;\nTratamento anaeróbio: ODe = 0 mg/L;"),
-                                const TextSpan(text: "\n● Tratamento anaeróbio: ODe = 0 mg/L;"),
-                                const TextSpan(text: "\n● Lodos ativados, filtros biológicos percoladores e outros sistemas aeróbios similares: ODe = 2 mg/L ou mais;"),
-                                const TextSpan(text: "\n● Lagoas facultativas: ODe = 4 a 6 mg/L.\n\n"),
+                                const TextSpan(
+                                    text:
+                                        "\n● Tratamento primário: ODe = 0 mg/L;\nTratamento anaeróbio: ODe = 0 mg/L;"),
+                                const TextSpan(
+                                    text:
+                                        "\n● Tratamento anaeróbio: ODe = 0 mg/L;"),
+                                const TextSpan(
+                                    text:
+                                        "\n● Lodos ativados, filtros biológicos percoladores e outros sistemas aeróbios similares: ODe = 2 mg/L ou mais;"),
+                                const TextSpan(
+                                    text:
+                                        "\n● Lagoas facultativas: ODe = 4 a 6 mg/L.\n\n"),
                                 TextSpan(
                                   text: "Fonte: Von Sperling (2005)",
                                   style: AppTextStyles.font,
-
                                 ),
                               ],
                             ),
@@ -148,20 +154,18 @@ class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
                           RichText(
                             text: TextSpan(
                               style: AppTextStyles.h3,
-                              text:
-                                  "Caso não possua o valor, sugere-se:\n\n",
+                              text: "Caso não possua o valor, sugere-se:\n\n",
                               children: [
                                 TextSpan(
-                                  text: "● Esgoto doméstico bruto: DBOe = 300 mg/L\n\n",
+                                  text:
+                                      "● Esgoto doméstico bruto: DBOe = 300 mg/L\n\n",
                                   style: AppTextStyles.h3.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 TextSpan(
-                                  text: "Fonte: Von Sperling (2005)",
-                                  style: AppTextStyles.font
-                                ),
-                               
+                                    text: "Fonte: Von Sperling (2005)",
+                                    style: AppTextStyles.font),
                               ],
                             ),
                           )

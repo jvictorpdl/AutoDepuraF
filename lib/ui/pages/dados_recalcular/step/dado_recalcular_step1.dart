@@ -56,7 +56,6 @@ class _DadosRecalcularStepState extends State<DadosRecalcularStep> {
           title: "Eficiência",
           hintText: "%",
         ),
-
       ],
     );
     // const SizedBox(height: 20),
