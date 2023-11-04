@@ -5,7 +5,6 @@ import 'package:auto_depura/ui/pages/dados_do_esgoto/steps/dados_esgoto_step2.da
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
-import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
 class DadosDoEsgotoPage extends StatefulWidget {

@@ -4,7 +4,6 @@ import 'package:auto_depura/ui/pages/dados_recalcular/dados_recalcularstep.dart'
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
-import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
 class DadosRecalcularPagePage extends StatefulWidget {

@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:auto_depura/core/bloc/global_bloc.dart';
 import 'package:auto_depura/core/domain/tables.dart';
 import 'package:auto_depura/core/services/service_locator.dart';
 import 'package:auto_depura/ui/pages/grafico/grafico.dart';
 import 'package:auto_depura/ui/pages/home/widgets/expandable_cards.dart';
-import 'package:auto_depura/ui/pages/tables/custom_table.dart';
 import 'package:auto_depura/ui/pages/tables/table_page.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
