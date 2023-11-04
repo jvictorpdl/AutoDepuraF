@@ -92,10 +92,7 @@ class HomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: serviceLocator<GlobalBloc>()
                               .checkAllNumbersFilled
-                          ? () => TablePage.show(
-                                context,
-                                tableObjects: Tables.auxilioEficienciaStepFinal,
-                              )
+                          ? () => Navigator.of(context).pushNamed("/line_chart")
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.accent,
