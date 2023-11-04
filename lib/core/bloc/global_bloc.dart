@@ -199,6 +199,7 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
       'particoesVet': particoesVet,
       'kmvet': kmvet,
     };
+    print(resultado);
 
     return resultado;
   }
