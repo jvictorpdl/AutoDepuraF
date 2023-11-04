@@ -1,5 +1,6 @@
 import 'package:auto_depura/core/bloc/global_bloc.dart';
 import 'package:auto_depura/core/extensions/double_to_input_text.dart';
+import 'package:auto_depura/core/extensions/string_to_double.dart';
 import 'package:auto_depura/core/services/service_locator.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
@@ -40,6 +41,10 @@ class _DadosRioStep1State extends State<DadosRioStep1> {
             controller3.text.isNotEmpty &&
             controller4.text.isNotEmpty) {
           widget.onPressed(action);
+          bloc.qr = controller1.text.asDouble;
+          bloc.odr = controller2.text.asDouble;
+          bloc.dbor = controller3.text.asDouble;
+          bloc.odmin = controller4.text.asDouble;
         } else {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Dados incompletos"),
