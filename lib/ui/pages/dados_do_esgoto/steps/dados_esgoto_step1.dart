@@ -40,9 +40,8 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
           singleButtonText: "Próximo",
           onPressed: (action) {
             if (controller1.text.isNotEmpty &&
-                controller2.text.isNotEmpty &&
-                controller3.text.isNotEmpty &&
-                controller4.text.isNotEmpty) {
+                controller2.text.isNotEmpty 
+                ) {
               widget.onPressed(action);
               bloc.qe = controller1.text.asDouble;
               bloc.ode = controller2.text.asDouble;
