@@ -24,7 +24,7 @@ class _DadosAdicionaisStep4State extends State<DadosAdicionaisStep4> {
 
   @override
   void initState() {
-    controller1 = TextEditingController(text: bloc.distancia.toText);
+    controller1 = TextEditingController(text: bloc.temperatura.toText);
     controller2 = TextEditingController(text: bloc.altitude.toText);
     controller3 = TextEditingController(text: bloc.cslinha.toText);
     super.initState();
@@ -39,7 +39,7 @@ class _DadosAdicionaisStep4State extends State<DadosAdicionaisStep4> {
         if ((controller1.text.isNotEmpty && controller2.text.isNotEmpty) ||
             controller3.text.isNotEmpty) {
           widget.onPressed(action);
-          bloc.distancia = controller1.text.asDouble;
+          bloc.temperatura = controller1.text.asDouble;
           bloc.altitude = controller2.text.asDouble;
           bloc.cslinha = controller3.text.asDouble;
         } else {

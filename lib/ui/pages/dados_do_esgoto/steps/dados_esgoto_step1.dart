@@ -25,9 +25,7 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
   @override
   void initState() {
     controller1 = TextEditingController(text: bloc.qe.toText);
-    controller2 = TextEditingController(text: bloc.odr.toText);
-    controller3 = TextEditingController(text: bloc.dbor.toText);
-    controller4 = TextEditingController(text: bloc.odmin.toText);
+    controller2 = TextEditingController(text: bloc.ode.toText);
     super.initState();
   }
 

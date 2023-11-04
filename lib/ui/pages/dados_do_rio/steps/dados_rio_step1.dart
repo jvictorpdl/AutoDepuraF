@@ -23,7 +23,7 @@ class _DadosRioStep1State extends State<DadosRioStep1> {
 
   @override
   void initState() {
-    controller1 = TextEditingController(text: bloc.qe.toText);
+    controller1 = TextEditingController(text: bloc.qr.toText);
     controller2 = TextEditingController(text: bloc.odr.toText);
     controller3 = TextEditingController(text: bloc.dbor.toText);
     controller4 = TextEditingController(text: bloc.odmin.toText);
