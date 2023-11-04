@@ -28,7 +28,9 @@ class Routes {
         );
       case "/line_chart":
         return MaterialPageRoute(
-          builder: (context) => LinechartWidget(),
+          builder: (context) => GraficoPage(
+            results: const {},
+          ),
         );
       default:
         return MaterialPageRoute(

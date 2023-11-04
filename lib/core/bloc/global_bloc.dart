@@ -1,16 +1,21 @@
+import 'package:auto_depura/core/extensions/object_is_null.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import "dart:math";
+import 'dart:developer' as dev;
 
 part 'global_event.dart';
 part 'global_state.dart';
 part 'global_bloc.freezed.dart';
 
 class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
-  GlobalBloc() : super(const _Initial());
+  GlobalBloc() : super(const _Initial()) {
+    on<_Calculate>(_onCalculate);
+  }
 
   // Variables
+  final double neperiano = 2.7182818285;
   double? qr;
   double? odr;
   double? dbor;
@@ -46,151 +51,121 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
   double? odc;
   double? ct;
 
-  List<double> ctvet = [];
+  List<double> ctVet = [];
   List<double> lancamentos = [];
-  List<int> particoesVet = [];
-  List<int> odminVet = [];
-  List<int> kmvet = [];
+  List<double> particoesVet = [];
+  List<double> odminVet = [];
+  List<double> kmvet = [];
 
-  Map<String, dynamic> calcularResultado(Map<String, dynamic> entrada) {
-    List<int> particoesVet = [];
-    List<double> ctVet = [];
-    List<double> odminVet = [];
-    List<double> kmvet = [];
+  // TODO: Trabalho do JV
+  bool get checkAllNumbersFilled =>
+      k120c.isNotNull && ct.isNotNull && odc.isNotNull && deficitc.isNotNull;
 
-    if (entrada.containsKey('k120c')) {
-      entrada['k1t'] = entrada['k120c'] *
-          pow(entrada['tetak1'], entrada['temperatura'] - 20);
+  void _onCalculate(
+    _Calculate event,
+    Emitter<GlobalState> emit,
+  ) async {
+    if (state == const GlobalState.calculating()) return;
+    emit(const GlobalState.calculating());
+    setupTest();
+    final results = calcularResultado();
+    emit(GlobalState.calculated(results));
+  }
+
+  Map<String, dynamic> calcularResultado() {
+    ctVet.clear();
+    odminVet.clear();
+    particoesVet.clear();
+    kmvet.clear();
+
+    if (k120c != null) {
+      k1t = k120c! * pow(tetak1!, temperatura! - 20);
     }
 
-    if (!entrada.containsKey('k2t')) {
-      if (entrada.containsKey('k220c')) {
-        entrada['k2t'] = entrada['k220c'] *
-            pow(entrada['tetak2'], entrada['temperatura'] - 20);
-      } else if (entrada.containsKey('h')) {
-        if (entrada['h'] < 4 &&
-            entrada['h'] >= 0.6 &&
-            0.05 <= entrada['velocidade'] &&
-            entrada['velocidade'] < 0.8) {
-          entrada['k220c'] =
-              3.73 * pow(entrada['velocidade'], 0.5) * pow(entrada['h'], -1.5);
-        } else if (entrada['h'] < 4 &&
-            entrada['h'] >= 0.6 &&
-            0.8 <= entrada['velocidade'] &&
-            entrada['velocidade'] < 1.5) {
-          entrada['k220c'] =
-              5 * pow(entrada['velocidade'], 0.97) * pow(entrada['h'], -1.67);
-        } else if (entrada['h'] >= 0.1 &&
-            entrada['h'] < 0.6 &&
-            0.05 <= entrada['velocidade'] &&
-            entrada['velocidade'] < 1.5) {
-          entrada['k220c'] =
-              5.3 * pow(entrada['velocidade'], 0.67) * pow(entrada['h'], -1.85);
+    if (k2t == null) {
+      if (k220c != null) {
+        k2t = k220c! * pow(tetak2!, temperatura! - 20);
+      } else if (h != null) {
+        if (h! < 4 && h! >= 0.6 && 0.05 <= velocidade! && velocidade! < 0.8) {
+          //formula O'Connor e Dobbins
+          k220c = 3.73 * pow(velocidade!, 0.5) * pow(h!, -1.5);
+        } else if (h! < 4 &&
+            h! >= 0.6 &&
+            0.8 <= velocidade! &&
+            velocidade! < 1.5) {
+          //formula Churchill et al
+          k220c = 5.0 * pow(velocidade!, 0.97) * pow(h!, -1.67);
+        } else if (h! >= 0.1 &&
+            h! < 0.6 &&
+            0.05 <= velocidade! &&
+            velocidade! < 1.5) {
+          //formula Owens et al
+          k220c = 5.3 * pow(velocidade!, 0.67) * pow(h!, -1.85);
         }
 
-        entrada['k2t'] = entrada['k220c'] *
-            pow(entrada['tetak2'], entrada['temperatura'] - 20);
+        k2t = k220c! * pow(tetak2!, temperatura! - 20);
       }
     }
 
-    if (!entrada.containsKey('t')) {
-      entrada['tempo'] = entrada['distancia'] / (entrada['velocidade'] * 86400);
+    tempo ??= distancia! / (velocidade! * 86400);
+
+    if (cslinha == null) {
+      cs = 14.652 -
+          4.1022 * pow(10, -1) * temperatura! +
+          7.991 * pow(10, -3) * pow(temperatura!, 2) -
+          7.7774 * pow(10, -5) * pow(temperatura!, 3);
+      cslinha = cs! * (1 - altitude! / 9450);
     }
 
-    if (!entrada.containsKey('cslinha')) {
-      entrada['cs'] = 14.652 -
-          4.1022 * pow(10, -1) * entrada['temperatura'] +
-          7.991 * pow(10, -3) * pow(entrada['temperatura'], 2) -
-          7.7774 * pow(10, -5) * pow(entrada['temperatura'], 3);
-      entrada['cslinha'] = entrada['cs'] * (1 - entrada['altitude'] / 9450);
-    }
-
-    if (entrada.containsKey('e')) {
-      if (entrada.containsKey('dboefl')) {
-        entrada['dboe'] = entrada['dboefl'];
+    if (e != null) {
+      if (dboefl != null) {
+        dboe = dboefl;
       }
-      entrada['dboefl'] = (1 - entrada['e'] / 100) * entrada['dboe'];
+      dboefl = (1 - e! / 100) * dboe!;
     }
 
     // DADOS DE SAÍDA
-    entrada['co'] =
-        (entrada['qr'] * entrada['odr'] + entrada['qe'] * entrada['ode']) /
-            (entrada['qr'] + entrada['qe']);
+    double co = (qr! * odr! + qe! * ode!) / (qr! + qe!);
 
-    if (entrada['lancamentos'].isNotEmpty) {
-      double qeXode = 0;
-      double qe_qe = 0;
-
-      for (Map<String, dynamic> lancamento in entrada['lancamentos']) {
-        qeXode += lancamento['qe'] * lancamento['ode'];
-        qe_qe += lancamento['qe'];
-      }
-
-      entrada['co'] = (entrada['qr'] * entrada['odr'] +
-              entrada['qe'] * entrada['ode'] +
-              qeXode) /
-          (entrada['qr'] + entrada['qe'] + qe_qe);
+    do_ = cslinha! - co;
+    double lo;
+    if (dboefl != null) {
+      double dbo5 = (qr! * dbor! + qe! * dboefl!) / (qr! + qe!);
+      kt = 1 / (1 - pow(neperiano, -5 * k1t!));
+      lo = dbo5 * kt!;
     } else {
-      entrada['co'] =
-          (entrada['qr'] * entrada['odr'] + entrada['qe'] * entrada['ode']) /
-              (entrada['qr'] + entrada['qe']);
+      double dbo5 = (qr! * dbor! + qe! * dboe!) / (qr! + qe!);
+      kt = 1 / (1 - pow(neperiano, -5 * k1t!));
+      lo = dbo5 * kt!;
     }
 
-    entrada['do'] = entrada['cslinha'] - entrada['co'];
+    double tc = (1 / (k2t! - k1t!)) *
+        log((k2t! / k1t!) * (1 - ((do_! * (k2t! - k1t!)) / lo) * k1t!));
 
-    // Concentração de DBO ultima mistura (Lo)
-    if (entrada.containsKey('dboefl')) {
-      entrada['dbo5'] = (entrada['qr'] * entrada['dbor'] +
-              entrada['qe'] * entrada['dboefl']) /
-          (entrada['qr'] + entrada['qe']);
-      entrada['kt'] = 1 /
-          (1 - pow(2.72, -5 * double.parse(entrada['k1t'].toStringAsFixed(2))));
-      entrada['lo'] = entrada['dbo5'] * entrada['kt'];
-    } else {
-      entrada['dbo5'] =
-          (entrada['qr'] * entrada['dbor'] + entrada['qe'] * entrada['dboe']) /
-              (entrada['qr'] + entrada['qe']);
-      entrada['kt'] = 1 /
-          (1 - pow(2.72, -5 * double.parse(entrada['k1t'].toStringAsFixed(2))));
-      entrada['lo'] = entrada['dbo5'] * entrada['kt'];
-    }
-
-    entrada['tc'] = (1 / (entrada['k2t'] - entrada['k1t'])) *
-        log((entrada['k2t'] / entrada['k1t']) *
-            (1 -
-                ((entrada['do'] * (entrada['k2t'] - entrada['k1t'])) /
-                        entrada['lo']) *
-                    entrada['k1t']));
-
-    entrada['dc'] = entrada['tc'] * entrada['velocidade'] * 86400;
+    double dc = tc * velocidade! * 86400;
 
     // ODC
-    entrada['deficitc'] = (entrada['k1t'] / entrada['k2t']) *
-        entrada['lo'] *
-        pow(2.7182818285, -entrada['k1t'] * entrada['tc']);
-    entrada['odc'] = entrada['cslinha'] - entrada['deficitc'];
+    double deficitc = (k1t! / k2t!) * lo * pow(neperiano, -k1t! * tc);
+    double odc = cslinha! - deficitc;
 
-    for (int i = 0; i <= entrada['particoes']; i++) {
+    for (double i = 0; i <= particoes!; i++) {
       particoesVet.add(i);
-      odminVet.add(entrada['odmin']);
+      odminVet.add(odmin!);
 
-      double tempop = ((entrada['distancia'] / entrada['particoes']) * i) /
-          (entrada['velocidade'] * 86400);
+      double tempop = ((distancia! / particoes!) * i) / (velocidade! * 86400);
       if (tempop == 0) {
-        entrada['ct'] = entrada['co'];
+        ctVet.add(co);
       } else {
-        entrada['ct'] = entrada['cslinha'] -
-            (((entrada['k1t'] * entrada['lo']) /
-                        (entrada['k2t'] - entrada['k1t'])) *
-                    (pow(2.7182818285, -entrada['k1t'] * tempop) -
-                        pow(2.7182818285, -entrada['k2t'] * tempop)) +
-                (entrada['cslinha'] - entrada['co']) *
-                    pow(2.7182818285, -entrada['k2t'] * tempop));
+        double ct = cslinha! -
+            (((k1t! * lo) / (k2t! - k1t!)) *
+                    (pow(neperiano, -k1t! * tempop) -
+                        pow(neperiano, -k2t! * tempop)) +
+                (cslinha! - co) * pow(neperiano, -k2t! * tempop));
+        ctVet.add(ct);
       }
 
-      double aux = entrada['distancia'] / entrada['particoes'];
+      double aux = distancia! / particoes!;
       kmvet.add((aux * i) / 1000);
-      ctVet.add(double.parse(entrada['ct'].toStringAsFixed(2)));
     }
 
     Map<String, dynamic> resultado = {
@@ -198,9 +173,53 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
       'odminVet': odminVet,
       'particoesVet': particoesVet,
       'kmvet': kmvet,
+      "odc": odc,
+      "dc": dc,
     };
-    print(resultado);
 
     return resultado;
+  }
+
+  void setupTest() {
+    qr = 0.651;
+    odr = 7;
+    dbor = 2;
+    odmin = 5;
+    k120c = 0.38;
+    tetak1 = 1.047;
+    temperatura = 23;
+    k1t = 0.44;
+    velocidade = 0.35;
+    particoes = 5;
+    tempo = 1.65;
+    cs = 7.8;
+    cslinha = 0;
+    cs = 0;
+    cslinha = 7.8;
+    qe = 0.114;
+    ode = 0;
+    dboe = 341;
+    qr = 0.651;
+    odr = 7;
+    dbor = 2;
+    odmin = 5;
+    tetak1 = 1.047;
+    temperatura = 23;
+    k1t = 0.44;
+    tetak2 = 1.024;
+    h = 0.80; //profundidade
+    k220c = 3.08;
+    k2t = 3.31; //3.31
+    distancia = 50000;
+    velocidade = 0.35;
+    particoes = 5;
+    tempo = 1.65;
+    cslinha = 7.8;
+    qe = 0.114;
+    ode = 0;
+    dboe = 341;
+    particoes = 5;
+    final result = calcularResultado();
+    dev.log(result.toString());
   }
 }

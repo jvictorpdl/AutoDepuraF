@@ -588,7 +588,7 @@ mixin _$GlobalState {
     required TResult Function() initial,
     required TResult Function() savingVariableValue,
     required TResult Function() calculating,
-    required TResult Function() calculated,
+    required TResult Function(Map<String, dynamic> results) calculated,
     required TResult Function() generatingChart,
     required TResult Function() chartGenerated,
   }) =>
@@ -598,7 +598,7 @@ mixin _$GlobalState {
     TResult? Function()? initial,
     TResult? Function()? savingVariableValue,
     TResult? Function()? calculating,
-    TResult? Function()? calculated,
+    TResult? Function(Map<String, dynamic> results)? calculated,
     TResult? Function()? generatingChart,
     TResult? Function()? chartGenerated,
   }) =>
@@ -608,7 +608,7 @@ mixin _$GlobalState {
     TResult Function()? initial,
     TResult Function()? savingVariableValue,
     TResult Function()? calculating,
-    TResult Function()? calculated,
+    TResult Function(Map<String, dynamic> results)? calculated,
     TResult Function()? generatingChart,
     TResult Function()? chartGenerated,
     required TResult orElse(),
@@ -706,7 +706,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() savingVariableValue,
     required TResult Function() calculating,
-    required TResult Function() calculated,
+    required TResult Function(Map<String, dynamic> results) calculated,
     required TResult Function() generatingChart,
     required TResult Function() chartGenerated,
   }) {
@@ -719,7 +719,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? savingVariableValue,
     TResult? Function()? calculating,
-    TResult? Function()? calculated,
+    TResult? Function(Map<String, dynamic> results)? calculated,
     TResult? Function()? generatingChart,
     TResult? Function()? chartGenerated,
   }) {
@@ -732,7 +732,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? savingVariableValue,
     TResult Function()? calculating,
-    TResult Function()? calculated,
+    TResult Function(Map<String, dynamic> results)? calculated,
     TResult Function()? generatingChart,
     TResult Function()? chartGenerated,
     required TResult orElse(),
@@ -833,7 +833,7 @@ class _$SavingVariableValueImpl implements _SavingVariableValue {
     required TResult Function() initial,
     required TResult Function() savingVariableValue,
     required TResult Function() calculating,
-    required TResult Function() calculated,
+    required TResult Function(Map<String, dynamic> results) calculated,
     required TResult Function() generatingChart,
     required TResult Function() chartGenerated,
   }) {
@@ -846,7 +846,7 @@ class _$SavingVariableValueImpl implements _SavingVariableValue {
     TResult? Function()? initial,
     TResult? Function()? savingVariableValue,
     TResult? Function()? calculating,
-    TResult? Function()? calculated,
+    TResult? Function(Map<String, dynamic> results)? calculated,
     TResult? Function()? generatingChart,
     TResult? Function()? chartGenerated,
   }) {
@@ -859,7 +859,7 @@ class _$SavingVariableValueImpl implements _SavingVariableValue {
     TResult Function()? initial,
     TResult Function()? savingVariableValue,
     TResult Function()? calculating,
-    TResult Function()? calculated,
+    TResult Function(Map<String, dynamic> results)? calculated,
     TResult Function()? generatingChart,
     TResult Function()? chartGenerated,
     required TResult orElse(),
@@ -959,7 +959,7 @@ class _$CalculatingImpl implements _Calculating {
     required TResult Function() initial,
     required TResult Function() savingVariableValue,
     required TResult Function() calculating,
-    required TResult Function() calculated,
+    required TResult Function(Map<String, dynamic> results) calculated,
     required TResult Function() generatingChart,
     required TResult Function() chartGenerated,
   }) {
@@ -972,7 +972,7 @@ class _$CalculatingImpl implements _Calculating {
     TResult? Function()? initial,
     TResult? Function()? savingVariableValue,
     TResult? Function()? calculating,
-    TResult? Function()? calculated,
+    TResult? Function(Map<String, dynamic> results)? calculated,
     TResult? Function()? generatingChart,
     TResult? Function()? chartGenerated,
   }) {
@@ -985,7 +985,7 @@ class _$CalculatingImpl implements _Calculating {
     TResult Function()? initial,
     TResult Function()? savingVariableValue,
     TResult Function()? calculating,
-    TResult Function()? calculated,
+    TResult Function(Map<String, dynamic> results)? calculated,
     TResult Function()? generatingChart,
     TResult Function()? chartGenerated,
     required TResult orElse(),
@@ -1049,6 +1049,8 @@ abstract class _$$CalculatedImplCopyWith<$Res> {
   factory _$$CalculatedImplCopyWith(
           _$CalculatedImpl value, $Res Function(_$CalculatedImpl) then) =
       __$$CalculatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Map<String, dynamic> results});
 }
 
 /// @nodoc
@@ -1058,26 +1060,57 @@ class __$$CalculatedImplCopyWithImpl<$Res>
   __$$CalculatedImplCopyWithImpl(
       _$CalculatedImpl _value, $Res Function(_$CalculatedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? results = null,
+  }) {
+    return _then(_$CalculatedImpl(
+      null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$CalculatedImpl implements _Calculated {
-  const _$CalculatedImpl();
+  const _$CalculatedImpl(final Map<String, dynamic> results)
+      : _results = results;
+
+  final Map<String, dynamic> _results;
+  @override
+  Map<String, dynamic> get results {
+    if (_results is EqualUnmodifiableMapView) return _results;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_results);
+  }
 
   @override
   String toString() {
-    return 'GlobalState.calculated()';
+    return 'GlobalState.calculated(results: $results)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CalculatedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$CalculatedImpl &&
+            const DeepCollectionEquality().equals(other._results, _results));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_results));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CalculatedImplCopyWith<_$CalculatedImpl> get copyWith =>
+      __$$CalculatedImplCopyWithImpl<_$CalculatedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1085,11 +1118,11 @@ class _$CalculatedImpl implements _Calculated {
     required TResult Function() initial,
     required TResult Function() savingVariableValue,
     required TResult Function() calculating,
-    required TResult Function() calculated,
+    required TResult Function(Map<String, dynamic> results) calculated,
     required TResult Function() generatingChart,
     required TResult Function() chartGenerated,
   }) {
-    return calculated();
+    return calculated(results);
   }
 
   @override
@@ -1098,11 +1131,11 @@ class _$CalculatedImpl implements _Calculated {
     TResult? Function()? initial,
     TResult? Function()? savingVariableValue,
     TResult? Function()? calculating,
-    TResult? Function()? calculated,
+    TResult? Function(Map<String, dynamic> results)? calculated,
     TResult? Function()? generatingChart,
     TResult? Function()? chartGenerated,
   }) {
-    return calculated?.call();
+    return calculated?.call(results);
   }
 
   @override
@@ -1111,13 +1144,13 @@ class _$CalculatedImpl implements _Calculated {
     TResult Function()? initial,
     TResult Function()? savingVariableValue,
     TResult Function()? calculating,
-    TResult Function()? calculated,
+    TResult Function(Map<String, dynamic> results)? calculated,
     TResult Function()? generatingChart,
     TResult Function()? chartGenerated,
     required TResult orElse(),
   }) {
     if (calculated != null) {
-      return calculated();
+      return calculated(results);
     }
     return orElse();
   }
@@ -1167,7 +1200,13 @@ class _$CalculatedImpl implements _Calculated {
 }
 
 abstract class _Calculated implements GlobalState {
-  const factory _Calculated() = _$CalculatedImpl;
+  const factory _Calculated(final Map<String, dynamic> results) =
+      _$CalculatedImpl;
+
+  Map<String, dynamic> get results;
+  @JsonKey(ignore: true)
+  _$$CalculatedImplCopyWith<_$CalculatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1211,7 +1250,7 @@ class _$GeneratingChartImpl implements _GeneratingChart {
     required TResult Function() initial,
     required TResult Function() savingVariableValue,
     required TResult Function() calculating,
-    required TResult Function() calculated,
+    required TResult Function(Map<String, dynamic> results) calculated,
     required TResult Function() generatingChart,
     required TResult Function() chartGenerated,
   }) {
@@ -1224,7 +1263,7 @@ class _$GeneratingChartImpl implements _GeneratingChart {
     TResult? Function()? initial,
     TResult? Function()? savingVariableValue,
     TResult? Function()? calculating,
-    TResult? Function()? calculated,
+    TResult? Function(Map<String, dynamic> results)? calculated,
     TResult? Function()? generatingChart,
     TResult? Function()? chartGenerated,
   }) {
@@ -1237,7 +1276,7 @@ class _$GeneratingChartImpl implements _GeneratingChart {
     TResult Function()? initial,
     TResult Function()? savingVariableValue,
     TResult Function()? calculating,
-    TResult Function()? calculated,
+    TResult Function(Map<String, dynamic> results)? calculated,
     TResult Function()? generatingChart,
     TResult Function()? chartGenerated,
     required TResult orElse(),
@@ -1337,7 +1376,7 @@ class _$ChartGeneratedImpl implements _ChartGenerated {
     required TResult Function() initial,
     required TResult Function() savingVariableValue,
     required TResult Function() calculating,
-    required TResult Function() calculated,
+    required TResult Function(Map<String, dynamic> results) calculated,
     required TResult Function() generatingChart,
     required TResult Function() chartGenerated,
   }) {
@@ -1350,7 +1389,7 @@ class _$ChartGeneratedImpl implements _ChartGenerated {
     TResult? Function()? initial,
     TResult? Function()? savingVariableValue,
     TResult? Function()? calculating,
-    TResult? Function()? calculated,
+    TResult? Function(Map<String, dynamic> results)? calculated,
     TResult? Function()? generatingChart,
     TResult? Function()? chartGenerated,
   }) {
@@ -1363,7 +1402,7 @@ class _$ChartGeneratedImpl implements _ChartGenerated {
     TResult Function()? initial,
     TResult Function()? savingVariableValue,
     TResult Function()? calculating,
-    TResult Function()? calculated,
+    TResult Function(Map<String, dynamic> results)? calculated,
     TResult Function()? generatingChart,
     TResult Function()? chartGenerated,
     required TResult orElse(),

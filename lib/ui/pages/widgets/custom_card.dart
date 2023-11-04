@@ -7,6 +7,7 @@ class CustomCard extends StatelessWidget {
   final String title;
   final List<Widget> children;
   final String singleButtonText;
+  final String nextButtonText;
   final String confirmButton;
   final Function(CustomCardAction) onPressed;
 
@@ -17,6 +18,7 @@ class CustomCard extends StatelessWidget {
     required this.onPressed,
     this.singleButtonText = "",
     this.confirmButton = "",
+    this.nextButtonText = "Próximo",
     //usar o confirmButton para os casos de ser o ultimo step que substuirá o botão Proximo
     //por um botão "Confirmar" mas ainda mantendo o botão voltar a esquerda
   });
@@ -89,7 +91,7 @@ class CustomCard extends StatelessWidget {
                   foregroundColor: Colors.white,
                 ),
                 child: Text(
-                  singleButtonText.isEmpty ? "Próximo" : singleButtonText,
+                  singleButtonText.isEmpty ? nextButtonText : singleButtonText,
                 ),
               )
             ],
