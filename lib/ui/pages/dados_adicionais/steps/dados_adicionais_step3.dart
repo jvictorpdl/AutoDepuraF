@@ -6,7 +6,6 @@ import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
-
 class DadosAdicionaisStep3 extends StatefulWidget {
   final Function(CustomCardAction) onPressed;
   const DadosAdicionaisStep3({super.key, required this.onPressed});
@@ -35,11 +34,19 @@ class _DadosAdicionaisStep3State extends State<DadosAdicionaisStep3> {
     return CustomCard(
       title: "Dados morfométricos e ambientais",
       onPressed: (action) {
-        widget.onPressed(action);
-        bloc.distancia = controller1.text.asDouble;
-        bloc.velocidade = controller2.text.asDouble;
-        bloc.particoes = controller3.text.asDouble;
-
+        if (controller1.text.isNotEmpty &&
+            controller2.text.isNotEmpty &&
+            controller3.text.isNotEmpty) {
+          widget.onPressed(action);
+          bloc.distancia = controller1.text.asDouble;
+          bloc.velocidade = controller2.text.asDouble;
+          bloc.particoes = controller3.text.asDouble;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Dados incompletos"),
+            backgroundColor: Colors.red,
+          ));
+        }
       },
       children: [
         CustomInput(
@@ -60,13 +67,7 @@ class _DadosAdicionaisStep3State extends State<DadosAdicionaisStep3> {
           tooltip: "Quantidade de segmentos",
           hintText: "Quantidade",
         ),
-      
       ],
     );
   }
-
-  
-
-
-
 }

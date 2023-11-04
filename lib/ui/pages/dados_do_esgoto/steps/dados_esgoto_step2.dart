@@ -39,7 +39,7 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
           title: "Dados do Esgoto",
           nextButtonText: "Concluir",
           onPressed: (action) {
-            if (controller1.text.isNotEmpty && controller2.text.isNotEmpty ||
+            if ((controller1.text.isNotEmpty && controller2.text.isNotEmpty) ||
                 controller3.text.isNotEmpty) {
               widget.onPressed(action);
               bloc.dboe = controller1.text.asDouble;

@@ -7,7 +7,6 @@ import 'package:auto_depura/ui/pages/widgets/or_text_cc.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
-
 class DadosAdicionaisStep4 extends StatefulWidget {
   final Function(CustomCardAction) onPressed;
   const DadosAdicionaisStep4({super.key, required this.onPressed});
@@ -35,12 +34,20 @@ class _DadosAdicionaisStep4State extends State<DadosAdicionaisStep4> {
   Widget build(BuildContext context) {
     return CustomCard(
       title: "Dados morfométricos e ambientais",
+      nextButtonText: "Concluir",
       onPressed: (action) {
-        widget.onPressed(action);
-        bloc.distancia = controller1.text.asDouble;
-        bloc.altitude = controller2.text.asDouble;
-        bloc.cslinha = controller3.text.asDouble;
-
+        if ((controller1.text.isNotEmpty && controller2.text.isNotEmpty) ||
+            controller3.text.isNotEmpty) {
+          widget.onPressed(action);
+          bloc.distancia = controller1.text.asDouble;
+          bloc.altitude = controller2.text.asDouble;
+          bloc.cslinha = controller3.text.asDouble;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Dados incompletos"),
+            backgroundColor: Colors.red,
+          ));
+        }
       },
       children: [
         CustomInput(
@@ -64,13 +71,7 @@ class _DadosAdicionaisStep4State extends State<DadosAdicionaisStep4> {
           tooltip: "Concentração de saturação na altitude (h)",
           hintText: "mg/L",
         ),
-      
       ],
     );
   }
-
-  
-
-
-
 }

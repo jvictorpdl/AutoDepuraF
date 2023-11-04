@@ -24,7 +24,10 @@ class _DadosAdicionaisPageState extends State<DadosAdicionaisPage> {
         break;
       case CustomCardAction.next:
         // se index menor ou igual a total de steps - 1:
-        if (index < 10){ setState(() => index++);}
+        if (index < 3){ setState(() => index++);}else{
+        Navigator.of(context).pushReplacementNamed("/home");
+        } 
+
         break;
     }
   }

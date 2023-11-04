@@ -36,11 +36,18 @@ class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
     return CustomCard(
       title: "Dados morfométricos e ambientais",
       onPressed: (action) {
-        widget.onPressed(action);
-        bloc.k120c = controller1.text.asDouble;
-        bloc.tetak1 = controller2.text.asDouble;
-        bloc.temperatura = controller3.text.asDouble;
-        bloc.k1t = controller4.text.asDouble;
+        if ((controller1.text.isNotEmpty && controller2.text.isNotEmpty && controller3.text.isNotEmpty) || controller4.text.isNotEmpty) {
+          widget.onPressed(action);
+          bloc.k120c = controller1.text.asDouble;
+          bloc.tetak1 = controller2.text.asDouble;
+          bloc.temperatura = controller3.text.asDouble;
+          bloc.k1t = controller4.text.asDouble;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Dados incompletos"),
+            backgroundColor: Colors.red,
+          ));
+        }
       },
       children: [
         CustomInput(
@@ -71,9 +78,4 @@ class _DadosAdicionaisStep1State extends State<DadosAdicionaisStep1> {
       ],
     );
   }
-
-  
-
-
-
 }

@@ -7,7 +7,6 @@ import 'package:auto_depura/ui/pages/widgets/or_text_cc.dart';
 import 'package:auto_depura/ui/widgets/custom_input.dart';
 import 'package:flutter/material.dart';
 
-
 class DadosAdicionaisStep2 extends StatefulWidget {
   final Function(CustomCardAction) onPressed;
   const DadosAdicionaisStep2({super.key, required this.onPressed});
@@ -43,14 +42,29 @@ class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
     return CustomCard(
       title: "Dados morfométricos e ambientais",
       onPressed: (action) {
-        widget.onPressed(action);
-        bloc.velocidade = controller1.text.asDouble;
-        bloc.tetak2 = controller2.text.asDouble;
-        bloc.temperatura = controller3.text.asDouble;
-        bloc.h = controller4.text.asDouble;
-        bloc.k220c = controller5.text.asDouble;
-        bloc.temperatura = controller7.text.asDouble;
-        bloc.k2t = controller8.text.asDouble; 
+        if ((controller1.text.isNotEmpty &&
+                controller2.text.isNotEmpty &&
+                controller3.text.isNotEmpty &&
+                controller4.text.isNotEmpty) ||
+            (controller5.text.isNotEmpty &&
+                controller2.text.isNotEmpty &&
+                controller3.text.isNotEmpty) ||
+            controller8.text.isNotEmpty) {
+          widget.onPressed(action);
+
+          bloc.velocidade = controller1.text.asDouble;
+          bloc.tetak2 = controller2.text.asDouble;
+          bloc.temperatura = controller3.text.asDouble;
+          bloc.h = controller4.text.asDouble;
+          bloc.k220c = controller5.text.asDouble;
+          bloc.temperatura = controller7.text.asDouble;
+          bloc.k2t = controller8.text.asDouble;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Dados incompletos"),
+            backgroundColor: Colors.red,
+          ));
+        }
       },
       children: [
         CustomInput(
@@ -93,7 +107,7 @@ class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
           hintText: "ad.",
         ),
         CustomInput(
-          controller: controller7,
+          controller: controller3,
           title: "T",
           tooltip: "Temperatura do líquido",
           hintText: "ºC",
@@ -110,9 +124,4 @@ class _DadosAdicionaisStep2State extends State<DadosAdicionaisStep2> {
       ],
     );
   }
-
-  
-
-
-
 }

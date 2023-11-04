@@ -57,9 +57,17 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
   List<double> odminVet = [];
   List<double> kmvet = [];
 
-  // TODO: Trabalho do JV
+  //checagem se as variaveis estão preenchidas levando em consideração que pode se fazer 
+  //o calculo a partir de diferentes metodos em alguns steps
   bool get checkAllNumbersFilled =>
-      k120c.isNotNull && ct.isNotNull && odc.isNotNull && deficitc.isNotNull;
+      qr.isNotNull && odr.isNotNull && dbor.isNotNull && odmin.isNotNull &&  
+      qe.isNotNull && ode.isNotNull && (dboe.isNotNull && e.isNotNull || dboefl.isNotNull) &&
+      (k120c.isNotNull && tetak1.isNotNull && temperatura.isNotNull || k1t.isNotNull) && 
+      (velocidade.isNotNull && tetak2.isNotNull && temperatura.isNotNull && h.isNotNull || 
+      (k220c.isNotNull && tetak2.isNotNull && temperatura.isNotNull) || k2t.isNotNull) &&  
+      distancia.isNotNull && velocidade.isNotNull && particoes.isNotNull && 
+      ((temperatura.isNotNull && h.isNotNull) || cslinha.isNotNull);
+      
 
   void _onCalculate(
     _Calculate event,
