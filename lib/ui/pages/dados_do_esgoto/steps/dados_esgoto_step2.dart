@@ -38,16 +38,15 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
         if (controller1.text.isNotEmpty && controller2.text.isNotEmpty ||
             controller3.text.isNotEmpty) {
           widget.onPressed(action);
+          bloc.dboe = controller1.text.asDouble;
+          bloc.e = controller2.text.asDouble;
+          bloc.dboefl = controller3.text.asDouble;
         } else {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Dados incompletos"),
             backgroundColor: Colors.red,
           ));
         }
-        GlobalBloc bloc = serviceLocator<GlobalBloc>();
-        bloc.dboe = controller1.text.asDouble;
-        bloc.e = controller2.text.asDouble;
-        bloc.dboefl = controller3.text.asDouble;
       },
       children: [
         CustomInput(

@@ -35,10 +35,19 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
     return CustomCard(
       title: "Dados do Esgoto",
       onPressed: (action) {
-        widget.onPressed(action);
-        bloc.qe = controller1.text.asDouble;
-        bloc.ode = controller2.text.asDouble;
-        
+        if (controller1.text.isNotEmpty &&
+            controller2.text.isNotEmpty &&
+            controller3.text.isNotEmpty &&
+            controller4.text.isNotEmpty) {
+          widget.onPressed(action);
+          bloc.qe = controller1.text.asDouble;
+          bloc.ode = controller2.text.asDouble;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Dados incompletos"),
+            backgroundColor: Colors.red,
+          ));
+        }
       },
       children: [
         CustomInput(
@@ -53,7 +62,6 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
           title: "ODe",
           hintText: "mg/L",
         ),
-       
       ],
     );
   }
