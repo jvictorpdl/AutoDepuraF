@@ -37,7 +37,7 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
       children: [
         CustomCard(
           title: "Dados do Esgoto",
-          nextButtonText: "Teu cu",
+          nextButtonText: "Concluir",
           onPressed: (action) {
             if (controller1.text.isNotEmpty && controller2.text.isNotEmpty ||
                 controller3.text.isNotEmpty) {
