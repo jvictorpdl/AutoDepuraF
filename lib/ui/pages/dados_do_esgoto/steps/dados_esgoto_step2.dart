@@ -76,7 +76,7 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
         ),
         const SizedBox(height: 20),
         CustomCard(
-          title: "Clique para ajuda em ODr",
+          title: "Clique para auxílio em DBOe",
           singleButtonText: "Ajuda",
           onPressed: (action) {
             showDialog(
@@ -85,10 +85,11 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
                 child: Container(
                   padding: const EdgeInsets.all(AppPaddings.defaultPadding),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Title",
+                        "Auxílio na definição da demando bioquímica do esgoto (DBOe)",
                         style: AppTextStyles.h1.copyWith(
                           color: Colors.black,
                         ),
@@ -100,17 +101,19 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
                       RichText(
                         text: TextSpan(
                           style: AppTextStyles.h3,
-                          text:
-                              "Não sendo possível coloetar amostras, sugere-se para esgoto doméstico:\n\n",
+                          text: "Caso não possua o valor, sugere-se:\n\n",
                           children: [
                             TextSpan(
-                              text: "Esgoto Bruto:\n",
+                              text:
+                                  "● Esgoto doméstico bruto: DBOe = 300 mg/L\n\n",
                               style: AppTextStyles.h3.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const TextSpan(text: "- ODe = 0 mg/L"),
-                            const TextSpan(text: "\nEsgoto Tratado:")
+                            TextSpan(
+                              text: "Fonte: Von Sperling (2005)",
+                              style: AppTextStyles.font,
+                            ),
                           ],
                         ),
                       )
@@ -122,6 +125,7 @@ class _DadosEsgotoStep2State extends State<DadosEsgotoStep2> {
           },
           children: const [],
         ),
+        
       ],
     );
   }

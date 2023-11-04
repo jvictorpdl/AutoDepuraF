@@ -37,7 +37,6 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
       children: [
         CustomCard(
           title: "Dados do Esgoto",
-          singleButtonText: "Próximo",
           onPressed: (action) {
             if (controller1.text.isNotEmpty &&
                 controller2.text.isNotEmpty 
@@ -137,57 +136,7 @@ class _DadosEsgotoStep1State extends State<DadosEsgotoStep1> {
           },
           children: const [],
         ),
-        const SizedBox(height: 20),
-        CustomCard(
-          title: "Clique para auxílio em DBOe",
-          singleButtonText: "Ajuda",
-          onPressed: (action) {
-            showDialog(
-              context: context,
-              builder: (context) => Dialog(
-                child: Container(
-                  padding: const EdgeInsets.all(AppPaddings.defaultPadding),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Auxílio na definição da demando bioquímica do esgoto (DBOe)",
-                        style: AppTextStyles.h1.copyWith(
-                          color: Colors.black,
-                        ),
-                      ),
-                      const Divider(
-                        thickness: 2,
-                        color: Colors.grey,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          style: AppTextStyles.h3,
-                          text: "Caso não possua o valor, sugere-se:\n\n",
-                          children: [
-                            TextSpan(
-                              text:
-                                  "● Esgoto doméstico bruto: DBOe = 300 mg/L\n\n",
-                              style: AppTextStyles.h3.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "Fonte: Von Sperling (2005)",
-                              style: AppTextStyles.font,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-          children: const [],
-        )
+        
       ],
     );
   }
