@@ -16,20 +16,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalBloc bloc = serviceLocator<GlobalBloc>();
     return BlocConsumer<GlobalBloc, GlobalState>(
-      listener: (context, state) {
-        log(state.toString());
-        state.maybeWhen(
-          orElse: () => null,
-          calculated: (results) => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => GraficoPage(
-                results: results,
-              ),
-            ),
-          ),
-        );
-      },
+      bloc: bloc,
+      listener: (context, state) {},
       builder: (context, state) => Scaffold(
         backgroundColor: AppColors.background,
         body: SafeArea(
@@ -90,10 +80,16 @@ class HomePage extends StatelessWidget {
                   child: Tooltip(
                     message: "Calcular os resultados adicionados",
                     child: ElevatedButton(
-                      onPressed: serviceLocator<GlobalBloc>()
-                              .checkAllNumbersFilled
-                          ? () => Navigator.of(context).pushNamed("/line_chart")
-                          : null,
+                      onPressed:
+                          serviceLocator<GlobalBloc>().checkAllNumbersFilled
+                              ? () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => GraficoPage(
+                                        results: bloc.calcularResultado(),
+                                      ),
+                                    ),
+                                  )
+                              : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.accent,
                         foregroundColor: Colors.white,

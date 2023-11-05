@@ -5,6 +5,6 @@ GetIt serviceLocator = GetIt.I;
 
 class ServiceLocator {
   static void registerServices() {
-    serviceLocator.registerSingleton<GlobalBloc>(GlobalBloc());
+    serviceLocator.registerLazySingleton<GlobalBloc>(() => GlobalBloc());
   }
 }

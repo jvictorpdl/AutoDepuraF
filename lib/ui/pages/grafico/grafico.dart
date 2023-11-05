@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:auto_depura/ui/pages/grafico/line_titles.dart';
+import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -80,60 +81,154 @@ class _GraficoPageState extends State<GraficoPage> {
     var (minX, minY) = calculateDelta();
     calculateDelta();
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 64),
-        child: LineChart(
-          LineChartData(
-            minX: 0,
-            maxX: maxX + minX,
-            minY: 0,
-            maxY: maxY + minY,
-            clipData: const FlClipData.all(),
-            backgroundColor: const Color(0xfffefefe),
-            titlesData: LineTitles.getTitleData(),
-            gridData: FlGridData(
-              show: true,
-              getDrawingHorizontalLine: (value) => const FlLine(
-                color: Color.fromARGB(68, 121, 131, 141),
-                strokeWidth: 1,
-              ),
-              drawVerticalLine: true,
-              getDrawingVerticalLine: (value) => const FlLine(
-                color: Color.fromARGB(68, 121, 131, 141),
-                strokeWidth: 1,
-              ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Column(
+              children: [
+                Text(
+                  "Perfil de OD (mg/L)",
+                  style: AppTextStyles.h1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    RotatedBox(
+                      quarterTurns: 1,
+                      child: Text("OD (mg/L)", style: AppTextStyles.h2),
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * .7,
+                      width: MediaQuery.of(context).size.width * .9,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      child: LineChart(
+                        LineChartData(
+                          minX: 0,
+                          maxX: maxX + minX,
+                          minY: 0,
+                          maxY: maxY + minY,
+                          clipData: const FlClipData.all(),
+                          backgroundColor: const Color(0xfffefefe),
+                          titlesData: LineTitles.getTitleData(),
+                          gridData: FlGridData(
+                            show: true,
+                            getDrawingHorizontalLine: (value) => const FlLine(
+                              color: Color.fromARGB(68, 121, 131, 141),
+                              strokeWidth: 1,
+                            ),
+                            drawVerticalLine: true,
+                            getDrawingVerticalLine: (value) => const FlLine(
+                              color: Color.fromARGB(68, 121, 131, 141),
+                              strokeWidth: 1,
+                            ),
+                          ),
+                          borderData: FlBorderData(
+                            show: true,
+                            border: Border.all(
+                              color: const Color(0xff37434d),
+                              width: 1,
+                            ),
+                          ),
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: generateOdData(),
+                              isCurved: true,
+                              color: const Color(0xff23b6e6),
+                              barWidth: 5,
+                              preventCurveOverShooting: true,
+                              belowBarData: BarAreaData(
+                                show: true,
+                                gradient: LinearGradient(
+                                  colors: widget.odGradientColors,
+                                ),
+                              ),
+                            ),
+                            LineChartBarData(
+                              //Spots do ODmin aqui
+                              spots: generateOdMinData(),
+                              barWidth: 5,
+                              color: const Color(0xff02d39a),
+                              preventCurveOverShooting: true,
+                              dotData: const FlDotData(show: false),
+                            ),
+                          ],
+                        ),
+
+                        //  swapAnimationDuration: const Duration(milliseconds: 150), // Optional
+                        //  swapAnimationCurve: Curves.linear,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  "Distância (KM)",
+                  style: AppTextStyles.h2,
+                )
+              ],
             ),
-            borderData: FlBorderData(
-              show: true,
-              border: Border.all(color: const Color(0xff37434d), width: 1),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: widget.odGradientColors.first,
+                  radius: 5,
+                ),
+                const SizedBox(width: 2),
+                const Text("ODmin"),
+                const SizedBox(width: 10),
+                CircleAvatar(
+                  backgroundColor: widget.odGradientColors.last,
+                  radius: 5,
+                ),
+                const SizedBox(width: 2),
+                const Text("OD"),
+              ],
             ),
-            lineBarsData: [
-              LineChartBarData(
-                spots: generateOdData(),
-                isCurved: true,
-                color: const Color(0xff23b6e6),
-                barWidth: 5,
-                preventCurveOverShooting: true,
-                belowBarData: BarAreaData(
-                  show: true,
-                  gradient: LinearGradient(
-                    colors: widget.odGradientColors,
+            const SizedBox(height: 18.0),
+            ButtonBar(
+              children: [
+                OutlinedButton(
+                  onPressed: () =>
+                      Navigator.of(context).pushReplacementNamed("/home"),
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: AppColors.accent),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        10,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Calcular novamente",
+                    style: AppTextStyles.h3.copyWith(
+                      color: AppColors.accent,
+                    ),
                   ),
                 ),
-              ),
-              LineChartBarData(
-                //Spots do ODmin aqui
-                spots: generateOdMinData(),
-                barWidth: 5,
-                color: const Color(0xff02d39a),
-                preventCurveOverShooting: true,
-                dotData: const FlDotData(show: false),
-              ),
-            ],
-          ),
-
-          //  swapAnimationDuration: const Duration(milliseconds: 150), // Optional
-          //  swapAnimationCurve: Curves.linear,
+                ElevatedButton(
+                  onPressed: () =>
+                      Navigator.of(context).pushReplacementNamed("/home"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.accent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        10,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Simular novamente",
+                    style: AppTextStyles.h3.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
