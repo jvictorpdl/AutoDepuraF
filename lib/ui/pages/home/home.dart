@@ -82,15 +82,13 @@ class HomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed:
                           serviceLocator<GlobalBloc>().checkAllNumbersFilled
-                              ? () {
-                                  Navigator.of(context).push(
+                              ? () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => GraficoPage(
                                         results: bloc.calcularResultado(),
                                       ),
                                     ),
-                                  );
-                                }
+                                  )
                               : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.accent,
