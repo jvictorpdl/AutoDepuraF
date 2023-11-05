@@ -30,15 +30,16 @@ class _DadosRecalcularStepState extends State<DadosRecalcularStep> {
   Widget build(BuildContext context) {
     return CustomCard(
       title: "Dados do Esgoto",
+      singleButtonText: "Concluir",
       onPressed: (action) {
-        if (controller1.text.isNotEmpty && controller2.text.isNotEmpty) {
-          widget.onPressed(action);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("Dados incompletos"),
-            backgroundColor: Colors.red,
-          ));
-        }
+        // // if (controller1.text.isNotEmpty && controller2.text.isNotEmpty) {
+        widget.onPressed(action);
+        // // } else {
+        //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        //     content: Text("Dados incompletos"),
+        //     backgroundColor: Colors.red,
+        //   ));
+        // }
         GlobalBloc bloc = serviceLocator<GlobalBloc>();
         bloc.dboe = controller1.text.asDouble;
         bloc.e = controller2.text.asDouble;

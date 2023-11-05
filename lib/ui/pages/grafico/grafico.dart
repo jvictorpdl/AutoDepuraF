@@ -135,10 +135,10 @@ class _GraficoPageState extends State<GraficoPage> {
                           lineBarsData: [
                             LineChartBarData(
                               spots: generateOdData(),
-                              isCurved: true,
                               color: const Color(0xff23b6e6),
                               barWidth: 5,
-                              preventCurveOverShooting: true,
+                              // isCurved: true,
+                              // preventCurveOverShooting: true,
                               belowBarData: BarAreaData(
                                 show: true,
                                 gradient: LinearGradient(
@@ -210,7 +210,7 @@ class _GraficoPageState extends State<GraficoPage> {
                 ),
                 ElevatedButton(
                   onPressed: () =>
-                      Navigator.of(context).pushReplacementNamed("/home"),
+                      Navigator.of(context).pushReplacementNamed("/recalcular"),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.accent,
                     shape: RoundedRectangleBorder(

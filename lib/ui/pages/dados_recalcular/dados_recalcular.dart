@@ -1,6 +1,7 @@
 import 'package:auto_depura/core/bloc/global_bloc.dart';
 import 'package:auto_depura/core/services/service_locator.dart';
 import 'package:auto_depura/ui/pages/dados_recalcular/step/dado_recalcular_step1.dart';
+import 'package:auto_depura/ui/pages/grafico/grafico.dart';
 import 'package:auto_depura/ui/pages/widgets/custom_card.dart';
 import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
@@ -15,23 +16,23 @@ class DadosRecalcularPage extends StatefulWidget {
 
 class _DadosRecalcularPageState extends State<DadosRecalcularPage> {
   int index = 0;
+
+  final GlobalBloc bloc = serviceLocator<GlobalBloc>();
   void onPressed(CustomCardAction action) {
     //colocar dois botões, um com voltar e o outro com "recalcular"
     switch (action) {
       case CustomCardAction.previous:
-        if (index >= 1) {
-          setState(() => index--);
-        } else if (index == 0) {
-          Navigator.of(context).pushReplacementNamed("/home");
-        }
+       Navigator.of(context).pushNamed("/line_chart");
+
         break;
       case CustomCardAction.next:
-        // se index menor ou igual a total de steps - 1:
-        if (index < 1) {
-          setState(() => index++);
-        } else {
-          Navigator.of(context).pushReplacementNamed("/home");
-        }
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => GraficoPage(
+              results: bloc.calcularResultado(),
+            ),
+          ),
+        );
 
         break;
     }
@@ -126,56 +127,6 @@ class _DadosRecalcularPageState extends State<DadosRecalcularPage> {
               },
               children: const [],
             ),
-            const SizedBox(height: 20),
-            CustomCard(
-              title: "Clique para auxílio em DBOe",
-              singleButtonText: "Ajuda",
-              onPressed: (action) {
-                showDialog(
-                  context: context,
-                  builder: (context) => Dialog(
-                    child: Container(
-                      padding: const EdgeInsets.all(AppPaddings.defaultPadding),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Auxílio na definição da demando bioquímica do esgoto (DBOe)",
-                            style: AppTextStyles.h1.copyWith(
-                              color: Colors.black,
-                            ),
-                          ),
-                          const Divider(
-                            thickness: 2,
-                            color: Colors.grey,
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              style: AppTextStyles.h3,
-                              text: "Caso não possua o valor, sugere-se:\n\n",
-                              children: [
-                                TextSpan(
-                                  text:
-                                      "● Esgoto doméstico bruto: DBOe = 300 mg/L\n\n",
-                                  style: AppTextStyles.h3.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                TextSpan(
-                                    text: "Fonte: Von Sperling (2005)",
-                                    style: AppTextStyles.font),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-              children: const [],
-            )
           ],
         ),
       ),
