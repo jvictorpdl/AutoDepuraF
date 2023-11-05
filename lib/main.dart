@@ -14,19 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => serviceLocator<GlobalBloc>(),
-      child: MaterialApp(
-        title: 'Auto Depura',
-        locale: const Locale("pt-BR"),
-        onGenerateRoute: Routes.onGenerateRoute,
-        initialRoute: "/home",
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepPurple,
-          ),
-          useMaterial3: true,
+    return MaterialApp(
+      title: 'Auto Depura',
+      locale: const Locale("pt-BR"),
+      onGenerateRoute: Routes.onGenerateRoute,
+      initialRoute: "/home",
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
         ),
+        useMaterial3: true,
       ),
     );
   }

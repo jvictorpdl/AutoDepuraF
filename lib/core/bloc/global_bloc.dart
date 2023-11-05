@@ -57,26 +57,38 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
   List<double> odminVet = [];
   List<double> kmvet = [];
 
-  //checagem se as variaveis estão preenchidas levando em consideração que pode se fazer 
+  //checagem se as variaveis estão preenchidas levando em consideração que pode se fazer
   //o calculo a partir de diferentes metodos em alguns steps
   bool get checkAllNumbersFilled =>
-      qr.isNotNull && odr.isNotNull && dbor.isNotNull && odmin.isNotNull &&  
-      qe.isNotNull && ode.isNotNull && (dboe.isNotNull && e.isNotNull || dboefl.isNotNull) &&
-      (k120c.isNotNull && tetak1.isNotNull && temperatura.isNotNull || k1t.isNotNull) && 
-      (velocidade.isNotNull && tetak2.isNotNull && temperatura.isNotNull && h.isNotNull || 
-      (k220c.isNotNull && tetak2.isNotNull && temperatura.isNotNull) || k2t.isNotNull) &&  
-      distancia.isNotNull && velocidade.isNotNull && particoes.isNotNull && 
+      qr.isNotNull &&
+      odr.isNotNull &&
+      dbor.isNotNull &&
+      odmin.isNotNull &&
+      qe.isNotNull &&
+      ode.isNotNull &&
+      (dboe.isNotNull && e.isNotNull || dboefl.isNotNull) &&
+      (k120c.isNotNull && tetak1.isNotNull && temperatura.isNotNull ||
+          k1t.isNotNull) &&
+      (velocidade.isNotNull &&
+              tetak2.isNotNull &&
+              temperatura.isNotNull &&
+              h.isNotNull ||
+          (k220c.isNotNull && tetak2.isNotNull && temperatura.isNotNull) ||
+          k2t.isNotNull) &&
+      distancia.isNotNull &&
+      velocidade.isNotNull &&
+      particoes.isNotNull &&
       ((temperatura.isNotNull && h.isNotNull) || cslinha.isNotNull);
-      
 
   void _onCalculate(
     _Calculate event,
     Emitter<GlobalState> emit,
   ) async {
-    if (state == const GlobalState.calculating()) return;
+    dev.log("onCalculated chamado");
     emit(const GlobalState.calculating());
     setupTest();
     final results = calcularResultado();
+    dev.log("emitindo");
     emit(GlobalState.calculated(results));
   }
 
@@ -227,7 +239,5 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
     ode = 0;
     dboe = 341;
     particoes = 5;
-    final result = calcularResultado();
-    dev.log(result.toString());
   }
 }

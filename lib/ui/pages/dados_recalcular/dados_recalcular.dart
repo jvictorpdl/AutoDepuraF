@@ -6,15 +6,14 @@ import 'package:auto_depura/ui/theme/app_theme.dart';
 import 'package:auto_depura/ui/widgets/app_title.dart';
 import 'package:flutter/material.dart';
 
-class DadosRecalcularPagePage extends StatefulWidget {
-  const DadosRecalcularPagePage({super.key});
+class DadosRecalcularPage extends StatefulWidget {
+  const DadosRecalcularPage({super.key});
 
   @override
-  State<DadosRecalcularPagePage> createState() =>
-      _DadosRecalcularPagePageState();
+  State<DadosRecalcularPage> createState() => _DadosRecalcularPageState();
 }
 
-class _DadosRecalcularPagePageState extends State<DadosRecalcularPagePage> {
+class _DadosRecalcularPageState extends State<DadosRecalcularPage> {
   int index = 0;
   void onPressed(CustomCardAction action) {
     //colocar dois botões, um com voltar e o outro com "recalcular"

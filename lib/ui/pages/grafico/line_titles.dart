@@ -8,25 +8,21 @@ class LineTitles {
         show: true,
         topTitles: AxisTitles(
           axisNameSize: 16,
-          // drawBelowEverything: true,
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            // interval: 1,
-            reservedSize: 50,
             getTitlesWidget: leftTitles,
           ),
         ),
         rightTitles: AxisTitles(
           axisNameSize: 50,
           drawBelowEverything: true,
-          // axisNameSize: 0,
         ),
       );
 
   static Widget leftTitles(double value, TitleMeta meta) {
     TextStyle style = AppTextStyles.h3.copyWith(fontSize: 12);
-    return Text("${value.toStringAsFixed(1)}DT", style: style);
+    return Text(value.toStringAsFixed(1), style: style);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:auto_depura/ui/pages/dados_do_rio/dados_do_rio.dart';
 import 'package:auto_depura/ui/pages/dados_do_esgoto/dados_do_esgoto.dart';
 import 'package:auto_depura/ui/pages/dados_adicionais/dados_adicionais.dart';
+import 'package:auto_depura/ui/pages/dados_recalcular/dados_recalcular.dart';
 import 'package:auto_depura/ui/pages/grafico/grafico.dart';
 import 'package:auto_depura/ui/pages/home/home.dart';
 import 'package:auto_depura/ui/pages/tables/custom_table.dart';
@@ -12,7 +13,7 @@ class Routes {
     switch (settings.name) {
       case '/home':
         return MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => HomePage(),
         );
       case "/dados-do-rio":
         return MaterialPageRoute(
@@ -32,9 +33,13 @@ class Routes {
             results: const {},
           ),
         );
+      case "/recalcular":
+        return MaterialPageRoute(
+          builder: (context) => const DadosRecalcularPage(),
+        );
       default:
         return MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => HomePage(),
         );
     }
   }
