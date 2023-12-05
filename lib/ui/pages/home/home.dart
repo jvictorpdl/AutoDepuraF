@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 import 'package:auto_depura/core/bloc/global_bloc.dart';
 import 'package:auto_depura/core/domain/tables.dart';
 import 'package:auto_depura/core/services/service_locator.dart';
@@ -82,14 +83,55 @@ class HomePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed:
                           serviceLocator<GlobalBloc>().checkAllNumbersFilled
-                              ? () => Navigator.of(context).push(
+                              ? () {
+                                  var resultado = bloc.calcularResultado();
+                                  // print(resultado);
+                                  if ((resultado['ctVet'] as List<double>)
+                                          .reduce(min) <
+                                      0) {
+                                    showDialog<void>(
+                                      context: context,
+                                      barrierDismissible:
+                                          false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Alerta'),
+                                          content: const SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text(
+                                                    'Concentração negativa de oxigênio dissolvido!!! O modelo de Streeter-Phelps não tem validade para este caso.'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: const Text('Ok!'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }else{
+                                  Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => GraficoPage(
-                                        results: bloc.calcularResultado(),
+                                        results: resultado,
                                       ),
                                     ),
-                                  )
-                              : null,
+                                  );
+                                  }
+
+                                }
+                              : () => ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text(
+                                        "Ocorreu algum problema, reveja os dados"),
+                                    backgroundColor: Colors.red,
+                                  )),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.accent,
                         foregroundColor: Colors.white,

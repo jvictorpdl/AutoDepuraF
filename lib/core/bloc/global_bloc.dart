@@ -186,7 +186,9 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
 
       double aux = distancia! / particoes!;
       kmvet.add((aux * i) / 1000);
+      // ctVet = [-1, -2, 5, 2, 5];
     }
+
 
     Map<String, dynamic> resultado = {
       'ctVet': ctVet,
